@@ -6,12 +6,12 @@ const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasEl
 
 mach2.math.setScale(122);
 
-const latex = mach2.latex.createLatexRenderingContext(scene.ctx, "g(x) = \\sin(x) + \\cos(x)");
-const latex5 = mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\sin(x)");
-const latex6 = mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\cos(x)");
-const latex2 = mach2.latex.createLatexRenderingContext(scene.ctx, "\\bigl(\\frac{\\pi}{4}, \\sqrt{2}\\bigr)");
-const latex3 = mach2.latex.createLatexRenderingContext(scene.ctx, "(2\\pi, 1)");
-const latex4 = mach2.latex.createLatexRenderingContext(scene.ctx, "(2\\pi, 0)");
+const latex = await mach2.latex.createLatexRenderingContext(scene.ctx, "g(x) = \\sin(x) + \\cos(x)");
+const latex5 = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\sin(x)");
+const latex6 = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\cos(x)");
+const latex2 = await mach2.latex.createLatexRenderingContext(scene.ctx, "\\bigl(\\frac{\\pi}{4}, \\sqrt{2}\\bigr)");
+const latex3 = await mach2.latex.createLatexRenderingContext(scene.ctx, "(2\\pi, 1)");
+const latex4 = await mach2.latex.createLatexRenderingContext(scene.ctx, "(2\\pi, 0)");
 
 scene.add(
     new (class extends mach2.Dynamic {

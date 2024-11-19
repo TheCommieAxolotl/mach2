@@ -1,7 +1,8 @@
-import katex from "katex";
 import { parseColor } from "~/color";
 import { cartesianToCanvas, lerp } from "~/math";
 import { Color, HorizontalPosition, VerticalPosition } from "~/shared";
+
+let katex: typeof import("katex") | null = null;
 
 /**
  * Create a new LaTeX rendering context.
@@ -13,7 +14,15 @@ import { Color, HorizontalPosition, VerticalPosition } from "~/shared";
  * // ...
  * ltx.render(0, 0, "white");
  */
-export const createLatexRenderingContext = (ctx: CanvasRenderingContext2D, latex: string) => {
+export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D, latex: string) => {
+    if (!katex) {
+        katex = (await import("katex")).default;
+    }
+
+    if (!katex) {
+        throw new Error("Failed to load KaTeX, did you forget to install it?");
+    }
+
     const string = katex.renderToString(latex, {
         output: "mathml",
     });
@@ -60,4 +69,4 @@ export const createLatexRenderingContext = (ctx: CanvasRenderingContext2D, latex
     };
 };
 
-export type LatexRenderingContext = ReturnType<typeof createLatexRenderingContext>;
+export type LatexRenderingContext = Awaited<ReturnType<typeof createLatexRenderingContext>>;
