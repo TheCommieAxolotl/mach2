@@ -60,14 +60,14 @@ export const point = (
 
         const [x, y] = canvasToCartesian(ctx, tx, ty);
 
-        label.render(x, y, `rgba(255,255,255, ${opacity})`, positionX || "right", positionY || "top");
+        label.render(x, y, `rgba(255,255,255, ${opacity})`, positionX ?? "right", positionY ?? "top");
     } else {
         ctx.fillStyle = `rgba(255,255,255, ${opacity})`;
 
         const tx = typeof positionX === "number" ? lerp(canvas[0] - 10, canvas[0] + 10, positionX) : positionX === "left" ? canvas[0] - 10 : canvas[0] + 10;
         const ty = typeof positionY === "number" ? lerp(canvas[1] - 15, canvas[1] + 32, positionY) : positionY === "top" ? canvas[1] - 15 : canvas[1] + 32;
 
-        ctx.fillText(label || `(${x.toFixed(2)}, ${y.toFixed(2)})`, tx, ty);
+        ctx.fillText(label ?? `(${x.toFixed(2)}, ${y.toFixed(2)})`, tx, ty);
     }
     ctx.closePath();
 };
