@@ -18,7 +18,7 @@ export type SceneOptions = {
 /**
  * Creates a scene.
  */
-export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions>): Scene => {
+export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> = {}): Scene => {
     const settings: SceneOptions = {
         debug: false,
         resolution: 2,
