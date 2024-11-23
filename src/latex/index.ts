@@ -4,6 +4,8 @@ import { Color, HorizontalPosition, VerticalPosition } from "~/shared";
 
 let katex: typeof import("katex") | null = null;
 
+let i = 0;
+
 /**
  * Create a new LaTeX rendering context.
  * NOTE: This should be used either with Dynamic.once() or called outside of the update loop.
@@ -23,9 +25,17 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
         throw new Error("Failed to load KaTeX, did you forget to install it?");
     }
 
-    const string = katex.renderToString(latex, {
-        output: "mathml",
-    });
+    let string = "";
+    try {
+        string = katex.renderToString(latex, {
+            output: "mathml",
+            displayMode: true,
+            colorIsTextColor: true,
+        });
+    } catch (e) {
+        string = '<span style="color: red;">Invalid LaTeX</span>';
+        console.error(e);
+    }
 
     const mounted = document.createElement("div");
 
@@ -33,7 +43,7 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
     mounted.style.position = "absolute";
     mounted.style.top = "0";
     mounted.style.left = "0";
-    mounted.style.zIndex = "1000";
+    mounted.style.zIndex = `${1000 + i++}`;
     mounted.style.pointerEvents = "none";
     mounted.style.display = "none";
     mounted.style.userSelect = "none";
