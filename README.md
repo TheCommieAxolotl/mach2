@@ -2,10 +2,10 @@
 
 A speedy, lightweight, and typesafe canvas rendering and lifecycle management library.
 
-![Three windows are open in a grid layout. The leftmost window shows the graphs of three trigonometric functions, the top right window shows a half-life graph modelling the decay of atoms, and the lower right window shows a rendering of the Mandelbrot set.](./assets//demo.png)
+![Three windows are open in a grid layout. The leftmost window shows the graphs of four trigonometric functions, the top right window shows a x-y representation of a Lorenz attractor, and the lower right window shows a rendering of the Mandelbrot set.](./assets//demo.png)
 
-> Graphs of $\sin(x)$, $\cos(x)$, and $\sin(x)+\cos(x)$.
-> Half-life graph of a radioactive substance, and the Mandelbrot set.
+> Graphs of $f(x) = \sin(x) + \cos(\frac{x}{2}) + \cos(\frac{x}{3}) + \cos(2x)$.
+> x-y rendering of a Lorentz attractor, and a rendering of the Mandelbrot set.
 
 ## Features
 
