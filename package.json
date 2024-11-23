@@ -1,7 +1,7 @@
 {
     "name": "mach2",
     "version": "0.0.0",
-    "description": "",
+    "description": "A speedy, lightweight, and typesafe canvas rendering and lifecycle management library.",
     "main": "dist/mach2.cjs",
     "module": "dist/mach2.js",
     "types": "index.d.ts",
@@ -10,6 +10,23 @@
     "files": [
         "dist",
         "index.d.ts"
+    ],
+    "license": "GPL-3.0-only",
+    "homepage": "https://github.com/TheCommieAxolotl/mach2",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TheCommieAxolotl/mach2.git"
+    },
+    "keywords": [
+        "canvas",
+        "rendering",
+        "mach2",
+        "lightweight",
+        "speedy",
+        "typesafe",
+        "math",
+        "2d",
+        "latex"
     ],
     "scripts": {
         "build": "vite build",
