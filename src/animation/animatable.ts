@@ -14,7 +14,7 @@ export type Animatable<P> = {
  * @param initialValue {P}
  * @returns {Animatable<P>}
  */
-export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P): Animatable<P> => {
+export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P, precision = 0.001): Animatable<P> => {
     let value = initialValue;
     let targetValue = initialValue;
     let inLoop = false;
@@ -32,7 +32,7 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
             if (typeof value === "number" && typeof targetValue === "number") {
                 (value as number) = lerp(value, targetValue, lerpFactor);
 
-                if (Math.abs((value as number) - targetValue) > 0.001) {
+                if (Math.abs((value as number) - targetValue) > precision) {
                     requestAnimationFrame(loop.bind(null, true));
                 } else {
                     value = targetValue;
@@ -43,7 +43,7 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
                     value[i] = lerp(value[i], targetValue[i], lerpFactor);
                 }
 
-                if (value.some((v, i) => Math.abs(v - (targetValue as number[])[i]) > 0.001)) {
+                if (value.some((v, i) => Math.abs(v - (targetValue as number[])[i]) > precision)) {
                     requestAnimationFrame(loop.bind(null, true));
                 } else {
                     value = targetValue;
@@ -56,7 +56,7 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
                     }
                 }
 
-                if (Object.keys(value).some((key) => Math.abs((value as Record<string, number>)[key] - (targetValue as Record<string, number>)[key]) > 0.001)) {
+                if (Object.keys(value).some((key) => Math.abs((value as Record<string, number>)[key] - (targetValue as Record<string, number>)[key]) > precision)) {
                     requestAnimationFrame(loop.bind(null, true));
                 } else {
                     value = targetValue;

@@ -7,7 +7,8 @@ export type Transformable = [Parameters<typeof fn>[1], ObjectColor, Parameters<t
 
 export const createTranformable = (...functions: Transformable[]) => {
     const len = functions.length;
-    const functionWeighting = Array.from({ length: len }, () => createAnimatable<number>(0));
+    // we need slightly more precision for functions, otherwise there will be a noticeable jump
+    const functionWeighting = Array.from({ length: len }, () => createAnimatable<number>(0, 0.0005));
     functionWeighting[0].setImmediate(1);
 
     let targetIndex = 0;
