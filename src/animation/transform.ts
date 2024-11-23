@@ -5,6 +5,17 @@ import { ObjectColor } from "~/shared";
 
 export type Transformable = [Parameters<typeof fn>[1], ObjectColor, Parameters<typeof fn>[3]];
 
+/**
+ * Create a transformable function that can be rendered to a canvas while interpolating between multiple functions.
+ *
+ * @example
+ * const transformable = createTranformable(
+ *  [(x) => x, mach2.colors.red, 1],
+ *  [(x) => x ** 2, mach2.colors.green, 1]
+ * );
+ * // ...
+ * transformable.render(ctx);
+ */
 export const createTranformable = (...functions: Transformable[]) => {
     const len = functions.length;
     // we need slightly more precision for functions, otherwise there will be a noticeable jump
