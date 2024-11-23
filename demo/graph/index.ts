@@ -5,7 +5,7 @@ const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasEl
     debug: true,
 });
 
-mach2.math.setScale(122);
+mach2.math.setImmediateScale(122);
 
 const latex = await mach2.latex.createLatexRenderingContext(scene.ctx, "g(x) = \\sin(x) + \\cos(x)");
 const latex5 = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\sin(x)");
