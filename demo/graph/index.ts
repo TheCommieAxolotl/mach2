@@ -1,4 +1,5 @@
 import mach2 from "mach2";
+import "katex/dist/katex.min.css";
 
 const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasElement, {
     debug: true,
@@ -9,7 +10,7 @@ mach2.math.setScale(122);
 const latex = await mach2.latex.createLatexRenderingContext(scene.ctx, "g(x) = \\sin(x) + \\cos(x)");
 const latex5 = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\sin(x)");
 const latex6 = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\cos(x)");
-const latex2 = await mach2.latex.createLatexRenderingContext(scene.ctx, "\\bigl(\\frac{\\pi}{4}, \\sqrt{2}\\bigr)");
+const latex2 = await mach2.latex.createLatexRenderingContext(scene.ctx, "\\Bigl(\\frac{\\pi}{4}, \\sqrt{2}\\Bigr)");
 const latex3 = await mach2.latex.createLatexRenderingContext(scene.ctx, "(2\\pi, 1)");
 const latex4 = await mach2.latex.createLatexRenderingContext(scene.ctx, "(2\\pi, 0)");
 
@@ -52,6 +53,8 @@ scene.add(
             ];
 
             const positions = [{ horizontal: 1 }, { horizontal: 1 }, { horizontal: 0 }, { horizontal: 1 }, { horizontal: 1 }];
+
+            console.log(this.opacities(), this.positions());
 
             const index = i % sequences.length;
             this.opacities.set(sequences[index]);

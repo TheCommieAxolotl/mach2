@@ -1,4 +1,5 @@
 import mach2 from "mach2";
+import "katex/dist/katex.min.css";
 
 const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasElement, {
     debug: true,
