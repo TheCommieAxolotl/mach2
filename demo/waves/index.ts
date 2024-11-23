@@ -7,22 +7,7 @@ const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasEl
 mach2.math.setScale(100);
 mach2.math.setPan(0, 500);
 
-const colors = [
-    mach2.color.red,
-    mach2.color.green,
-    mach2.color.blue,
-    mach2.color.yellow,
-    mach2.color.purple,
-    mach2.color.orange,
-    mach2.color.pink,
-    mach2.color.lightBlue,
-    mach2.color.lightGreen,
-    mach2.color.lightRed,
-    mach2.color.lightYellow,
-    mach2.color.lightPurple,
-    mach2.color.lightOrange,
-    mach2.color.lightPink,
-];
+const colors = [mach2.color.lightBlue, mach2.color.lightGreen, mach2.color.lightRed, mach2.color.lightYellow, mach2.color.lightPurple, mach2.color.lightOrange, mach2.color.lightPink];
 
 let shift = 0;
 
@@ -32,12 +17,12 @@ const added = (x: number) => waves.reduce((acc, wave) => acc + wave(x), 0);
 
 const colorLatex = await mach2.latex.createLatexRenderingContext(
     scene.ctx,
-    `f(x) = \\color{${mach2.color.parseColor(colors[0], true)}}{\\sin(x)} + \\color{${mach2.color.parseColor(colors[1], true)}}{\\cos\\bigl(\\frac{x}{2}\\bigr)} + \\color{${mach2.color.parseColor(
+    `f(x) = \\color{${mach2.color.parseColor(colors[0], true)}}{\\sin(x)} + \\color{${mach2.color.parseColor(colors[1], true)}}{\\cos\\Bigl(\\frac{x}{2}\\Bigr)} + \\color{${mach2.color.parseColor(
         colors[2],
         true
-    )}}{\\sin\\bigl(\\frac{x}{3}\\bigr)} + \\color{${mach2.color.parseColor(colors[3], true)}}{\\cos(2x)}`
+    )}}{\\sin\\Bigl(\\frac{x}{3}\\Bigr)} + \\color{${mach2.color.parseColor(colors[3], true)}}{\\cos(2x)}`
 );
-const allLatex = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\sin(x) + \\cos\\bigl(\\frac{x}{2}\\bigr) + \\sin\\bigl(\\frac{x}{3}\\bigr) + \\cos(2x)");
+const allLatex = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) = \\sin(x) + \\cos\\Bigl(\\frac{x}{2}\\Bigr) + \\sin\\Bigl(\\frac{x}{3}\\Bigr) + \\cos(2x)");
 
 scene.add(
     new (class extends mach2.Dynamic {
