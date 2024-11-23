@@ -5,6 +5,7 @@ type AnimatablePrimitive = number | number[] | Record<string | number | symbol, 
 export type Animatable<P> = {
     (): P;
     set: (value: P, lerpFactor?: number) => void;
+    setImmediate: (value: P) => void;
 };
 
 /**
@@ -34,6 +35,7 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
                 if (Math.abs((value as number) - targetValue) > 0.001) {
                     requestAnimationFrame(loop.bind(null, true));
                 } else {
+                    value = targetValue;
                     inLoop = false;
                 }
             } else if (Array.isArray(value) && Array.isArray(targetValue)) {
@@ -44,6 +46,7 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
                 if (value.some((v, i) => Math.abs(v - (targetValue as number[])[i]) > 0.001)) {
                     requestAnimationFrame(loop.bind(null, true));
                 } else {
+                    value = targetValue;
                     inLoop = false;
                 }
             } else {
@@ -56,6 +59,7 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
                 if (Object.keys(value).some((key) => Math.abs((value as Record<string, number>)[key] - (targetValue as Record<string, number>)[key]) > 0.001)) {
                     requestAnimationFrame(loop.bind(null, true));
                 } else {
+                    value = targetValue;
                     inLoop = false;
                 }
             }
@@ -64,6 +68,11 @@ export const createAnimatable = <P extends AnimatablePrimitive>(initialValue: P)
         };
 
         loop();
+    };
+
+    animatable.setImmediate = (newValue: P) => {
+        targetValue = newValue;
+        value = newValue;
     };
 
     return animatable;
