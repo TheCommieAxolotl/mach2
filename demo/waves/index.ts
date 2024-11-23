@@ -5,7 +5,7 @@ const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasEl
     debug: true,
 });
 
-mach2.math.setScale(100);
+mach2.math.setImmediateScale(100);
 mach2.math.setPan(0, 500);
 
 const colors = [mach2.color.lightBlue, mach2.color.lightGreen, mach2.color.lightRed, mach2.color.lightYellow, mach2.color.lightPurple, mach2.color.lightOrange, mach2.color.lightPink];
@@ -40,8 +40,10 @@ scene.add(
                 throw new Error("CanvasRenderingContext2D is null");
             }
 
-            allLatex.render(-15, -3.5, mach2.color.opacity(mach2.color.white, this.opacities().all), "right", "bottom");
-            colorLatex.render(-15, -3.5, mach2.color.opacity(mach2.color.white, this.opacities().each), "right", "bottom");
+            const latexPoint = mach2.math.domToCartesian(this.ctx, 20, window.innerHeight - 20);
+
+            allLatex.render(...latexPoint, mach2.color.opacity(mach2.color.white, this.opacities().all), "right", "top");
+            colorLatex.render(...latexPoint, mach2.color.opacity(mach2.color.white, this.opacities().each), "right", "top");
 
             mach2.graph.axis(this.ctx, 0.4);
 
