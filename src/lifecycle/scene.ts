@@ -2,11 +2,14 @@ import { domToCartesian, setScale, setImmediateScale, cartesianToCanvas } from "
 import { Dynamic, Static } from "~/object";
 import { SceneObject } from "~/object/object";
 import { registerEvents } from "./interactivity";
+import { Color } from "~/shared";
+import { parseColor } from "~/color";
 
 export type SceneOptions = {
     debug: boolean;
     resolution: number;
     zoom: number;
+    background: Color;
     interactivity:
         | boolean
         | {
@@ -24,6 +27,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
         resolution: 2,
         zoom: 60,
         interactivity: true,
+        background: "#000000",
         ...options,
     };
 
@@ -40,6 +44,8 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
     if (ctx === null) {
         throw new Error("CanvasRenderingContext2D is null");
     }
+
+    canvas.style.backgroundColor = parseColor(settings.background);
 
     let deltaTime = 0;
     let frame = 0;

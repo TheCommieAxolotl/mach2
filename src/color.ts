@@ -5,6 +5,11 @@ export const white: ObjectColor = {
     g: 255,
     b: 255,
 }; // rgb(255, 255, 255)
+export const black: ObjectColor = {
+    r: 0,
+    g: 0,
+    b: 0,
+}; // rgb(0, 0, 0)
 export const red: ObjectColor = {
     r: 199,
     g: 68,

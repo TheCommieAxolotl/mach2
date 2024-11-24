@@ -1,4 +1,6 @@
+import { parseColor } from "~/color";
 import { cartesianToCanvas } from "~/math";
+import { Color } from "~/shared";
 
 export * from "./common";
 export * from "./polynomial";
@@ -10,8 +12,8 @@ export * from "./polar";
 /**
  * Render a Cartesian axis on the canvas.
  */
-export const axis = (ctx: CanvasRenderingContext2D, opacity = 1) => {
-    ctx.strokeStyle = `rgb(${80 * opacity}, ${80 * opacity}, ${80 * opacity})`;
+export const axis = (ctx: CanvasRenderingContext2D, opacity = 1, color?: Color) => {
+    ctx.strokeStyle = parseColor(color) || `rgb(${80 * opacity}, ${80 * opacity}, ${80 * opacity})`;
 
     ctx.beginPath();
 
