@@ -28,7 +28,6 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
     let string = "";
     try {
         string = katex.renderToString(latex, {
-            output: "mathml",
             displayMode: true,
             colorIsTextColor: true,
         });
