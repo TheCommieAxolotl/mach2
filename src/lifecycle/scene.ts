@@ -139,7 +139,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 
     if (settings.interactivity) {
         const { scroll, move } = typeof settings.interactivity === "boolean" ? { scroll: true, move: true } : settings.interactivity;
-        registerEvents(scroll, move);
+        registerEvents(canvas, scroll, move);
     }
 
     const stop = () => {

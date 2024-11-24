@@ -1,8 +1,8 @@
 import { setScale, getTargetScale, pan } from "~/math";
 
-export const registerEvents = (scroll: boolean, move: boolean) => {
+export const registerEvents = (cavnas: HTMLCanvasElement, scroll: boolean, move: boolean) => {
     if (scroll)
-        window.addEventListener("wheel", (e) => {
+        cavnas.addEventListener("wheel", (e) => {
             let targetScale = getTargetScale();
 
             if (e.deltaY > 0) {
@@ -20,6 +20,8 @@ export const registerEvents = (scroll: boolean, move: boolean) => {
             }
 
             setScale(targetScale);
+
+            e.preventDefault();
         });
 
     if (move) {
