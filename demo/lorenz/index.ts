@@ -1,6 +1,5 @@
 import mach2 from "mach2";
 import "katex/dist/katex.min.css";
-import { Point } from "~/math";
 
 const scene = mach2.scene(document.querySelector("canvas") as HTMLCanvasElement);
 
