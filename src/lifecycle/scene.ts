@@ -1,4 +1,4 @@
-import { domToCartesian, setScale, setImmediateScale } from "~/math";
+import { domToCartesian, setScale, setImmediateScale, cartesianToCanvas } from "~/math";
 import { Dynamic, Static } from "~/object";
 import { SceneObject } from "~/object/object";
 import { registerEvents } from "./interactivity";
@@ -44,6 +44,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
     let deltaTime = 0;
     let frame = 0;
     let sequenceStep = 0;
+    let cartesianUnit = 1;
 
     const add = <T extends SceneObject[]>(...object: T) => {
         for (const obj of object) {
@@ -53,7 +54,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 
     const update = async () => {
         for (const object of objects) {
-            object._beforeUpdate(deltaTime, frame);
+            object._beforeUpdate(deltaTime, frame, cartesianUnit);
 
             if (object instanceof Static || ("mount" in object && typeof object.mount === "function")) {
                 await (object.mount as () => void)();
@@ -98,8 +99,9 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
         await update();
 
         deltaTime = now - then;
-
         then = now;
+
+        cartesianUnit = (cartesianToCanvas(ctx, 1, 0)[0] - cartesianToCanvas(ctx, 0, 0)[0]) / settings.resolution;
 
         requestAnimationFrame(loop);
     };
@@ -111,9 +113,10 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
         canvas.height = rect.height * settings.resolution;
         canvas.dataset.resolution = settings.resolution.toString();
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        cartesianUnit = (cartesianToCanvas(ctx, 1, 0)[0] - cartesianToCanvas(ctx, 0, 0)[0]) / settings.resolution;
 
         for (const object of objects) {
-            object._init(ctx, deltaTime, frame, ret);
+            object._init(ctx, deltaTime, frame, ret, cartesianUnit);
         }
 
         loop();

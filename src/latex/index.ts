@@ -51,7 +51,7 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
     document.body.appendChild(mounted);
 
     return {
-        render: (x: number, y: number, color: Color, alignX: HorizontalPosition = "center", alignY: VerticalPosition = "center") => {
+        render: (x: number, y: number, color: Color, alignX: HorizontalPosition = "center", alignY: VerticalPosition = "center", size: string | number = "1em") => {
             const p = cartesianToCanvas(ctx, x, y);
 
             if (p === undefined) return () => {};
@@ -61,6 +61,7 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
             mounted.style.display = "block";
             mounted.style.left = `${p[0] / Number(ctx.canvas.dataset.resolution) + rect.left}px`;
             mounted.style.top = `${p[1] / Number(ctx.canvas.dataset.resolution) + rect.top}px`;
+            mounted.style.fontSize = typeof size === "number" ? `${size}px` : size;
 
             mounted.style.color = parseColor(color);
 

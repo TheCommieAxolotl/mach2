@@ -5,7 +5,7 @@
 }
 
 .katex {
-    font-size: 1em !important;
+    font-size: inherit !important;
 }
 
 html,

@@ -18,7 +18,7 @@ scene.add(
 
             mach2.graph.axis(this.ctx, 0.4);
 
-            latex.render(0, 14, "white");
+            latex.render(0, 14, "white", undefined, undefined, this.cU);
 
             mach2.graph.polar(this.ctx, (theta) => Math.sqrt(100 * Math.cos(this.degree() * theta)), mach2.color.lightBlue, 2);
         }

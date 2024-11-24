@@ -8,6 +8,7 @@ export class SceneObject {
     public frame: number;
     public scene: Scene | null;
     public jobs: (() => void)[] = [];
+    public cU: number = 1;
     protected onceCalls = new Set<string>();
 
     constructor() {
@@ -31,15 +32,17 @@ export class SceneObject {
         setScale(target);
     }
 
-    _init(ctx: CanvasRenderingContext2D, deltaTime: number, frame: number, scene: Scene) {
+    _init(ctx: CanvasRenderingContext2D, deltaTime: number, frame: number, scene: Scene, cartesianUnit: number) {
         this.ctx = ctx;
         this.deltaTime = deltaTime;
         this.frame = frame;
         this.scene = scene;
+        this.cU = cartesianUnit;
     }
 
-    _beforeUpdate(deltaTime: number, frame: number) {
+    _beforeUpdate(deltaTime: number, frame: number, cartesianUnit: number) {
         this.deltaTime = deltaTime;
         this.frame = frame;
+        this.cU = cartesianUnit;
     }
 }
