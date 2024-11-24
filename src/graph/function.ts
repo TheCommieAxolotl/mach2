@@ -1,5 +1,5 @@
 import { parseColor } from "~/color";
-import { canvasToCartesian, cartesianToCanvas, getVisibleBounds } from "~/math";
+import { canvasToCartesian, cartesianToCanvas, getVisibleBounds, holdsValue } from "~/math";
 import { Color } from "~/shared";
 
 /**
@@ -33,7 +33,7 @@ export const fn = (ctx: CanvasRenderingContext2D, fn: (x: number) => number | un
 
             const coords = cartesianToCanvas(ctx, point[0], y);
 
-            if (lastY === undefined || !isFinite(lastY) || y === undefined || !isFinite(y) || coords[1] < -ctx.canvas.height || coords[1] > ctx.canvas.height) {
+            if (!holdsValue(lastY) || !holdsValue(y) || coords[1] < -ctx.canvas.height || coords[1] > ctx.canvas.height) {
                 ctx.moveTo(coords[0], coords[1]);
             } else {
                 ctx.lineTo(coords[0], coords[1]);

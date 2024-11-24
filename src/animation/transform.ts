@@ -1,4 +1,4 @@
-import { lerp } from "~/math";
+import { holdsValue, lerp } from "~/math";
 import { Animatable, createAnimatable } from "./animatable";
 import { fn } from "~/graph";
 import { ObjectColor } from "~/shared";
@@ -32,7 +32,7 @@ export const createTranformable = (...functions: Transformable[]) => {
     }> = createAnimatable({ r: 255, g: 255, b: 255 });
     const weight = createAnimatable(functions[0][2] || 1);
 
-    const render = (ctx: CanvasRenderingContext2D) => {
+    const render = (ctx: CanvasRenderingContext2D, draw = fn) => {
         const lastColor = color();
 
         const newColor = functions.reduce((acc, [_, c, __], i) => {
@@ -64,17 +64,17 @@ export const createTranformable = (...functions: Transformable[]) => {
             for (let i = 0; i < len; i++) {
                 const res = functions[i][0](x);
 
-                if (res === undefined) {
-                    return;
+                if (!holdsValue(res)) {
+                    continue;
                 }
 
-                result += res * functionWeighting[i]();
+                result += res! * functionWeighting[i]();
             }
 
             return result;
         };
 
-        fn(ctx, fun, newColor, newWeight);
+        draw(ctx, fun, newColor, newWeight);
     };
 
     const swapTo = (index: number) => {

@@ -5,6 +5,7 @@ export * from "./polynomial";
 export * from "./function";
 export * from "./point";
 export * from "./vector";
+export * from "./polar";
 
 /**
  * Render a Cartesian axis on the canvas.

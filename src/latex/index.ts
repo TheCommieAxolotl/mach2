@@ -76,6 +76,25 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
         cleanup: () => {
             mounted.remove();
         },
+        setEquation: (newLatex: string) => {
+            if (!katex) {
+                throw new Error("KaTeX is not loaded");
+            }
+
+            let newString = "";
+            try {
+                newString = katex.renderToString(newLatex, {
+                    output: "mathml",
+                    displayMode: true,
+                    colorIsTextColor: true,
+                });
+            } catch (e) {
+                newString = '<span style="color: red;">Invalid LaTeX</span>';
+                console.error(e);
+            }
+
+            mounted.innerHTML = newString;
+        },
     };
 };
 

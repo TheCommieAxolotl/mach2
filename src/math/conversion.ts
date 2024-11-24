@@ -113,3 +113,21 @@ export const domToCartesian = (ctx: CanvasRenderingContext2D, x: number, y: numb
 
     return canvasToCartesian(ctx, x * resolution - rect.left, y * resolution - rect.top);
 };
+
+/**
+ * Converts a point from polar coordinates to Cartesian coordinates.
+ */
+export const polarToCartesian = <R extends number | undefined, T extends number | undefined>(r: R, theta: T): R extends number ? Point : T extends number ? Point : undefined => {
+    if (r === undefined || theta === undefined) return undefined as any;
+
+    return [r * Math.cos(theta), r * Math.sin(theta)] as any;
+};
+
+/**
+ * Converts a point from Cartesian coordinates to polar coordinates.
+ */
+export const cartesianToPolar = <X extends number | undefined, Y extends number | undefined>(x: X, y: Y): X extends number ? Point : Y extends number ? Point : undefined => {
+    if (x === undefined || y === undefined) return undefined as any;
+
+    return [Math.sqrt(x ** 2 + y ** 2), Math.atan2(y, x)] as any;
+};
