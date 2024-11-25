@@ -1,6 +1,6 @@
 {
     "name": "mach2",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "A speedy, lightweight, and typesafe canvas rendering and lifecycle management library.",
     "main": "dist/mach2.cjs",
     "module": "dist/mach2.js",
