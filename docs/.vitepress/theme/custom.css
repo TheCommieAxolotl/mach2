@@ -1,0 +1,22 @@
+.canvas {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+
+    &::after {
+        content: "Failed to load this canvas :(";
+        z-index: -1;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: var(--vp-c-default-1);
+    }
+
+    canvas {
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+        border: 1px solid var(--vp-c-border);
+    }
+}
