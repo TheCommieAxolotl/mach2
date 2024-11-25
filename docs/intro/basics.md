@@ -84,7 +84,8 @@ scene.add(
 
 ## Next Steps
 
-Now that you've learned the basics of Mach2, you can move on to more advanced topics like [functions](/graphing/functions), [animations](/intro/animations), and [interactivity](/intro/interactivity).
+<!-- Now that you've learned the basics of Mach2, you can move on to more advanced topics like [functions](/graphing/functions), [animations](/intro/animations), and [interactivity](/intro/interactivity). -->
+Now that you've learned the basics of Mach2, you can move on to more advanced topics like [functions](/graphing/functions).
 
 <script>
     import mach2 from 'mach2';
