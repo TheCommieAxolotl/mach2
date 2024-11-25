@@ -17,5 +17,3 @@ export default {
     latex,
     animation,
 };
-
-export { object, lifecycle, math, draw, graph, color, latex, animation };

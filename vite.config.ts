@@ -27,6 +27,7 @@ export default defineConfig({
     plugins: [
         dts({
             exclude: ["test/**/*", "demo/**/*"],
+            rollupTypes: true,
         }),
         tsconfig(),
         terser(),
