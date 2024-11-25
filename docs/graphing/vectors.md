@@ -117,5 +117,5 @@ mach2.graph.vector(this.ctx, [
 
             scene.start();
         }
-    })
+    }, 0)
 </script>

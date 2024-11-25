@@ -159,6 +159,6 @@ Will graph the polynomial which passes through the points $(0, 1)$, $(1, 0)$, $(
 
             scene.start();
         }
-    });
+    }, 0);
 </script>
 

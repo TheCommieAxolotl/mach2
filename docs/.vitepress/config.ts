@@ -42,6 +42,7 @@ export default defineConfig({
                     { text: "Dealing with Coordinates", link: "/graphing/coordinates" },
                     { text: "Vectors", link: "/graphing/vectors" },
                     { text: "Polynomials", link: "/graphing/polynomials" },
+                    { text: "Superellipses", link: "/graphing/superellipses" },
                 ],
             },
         ],

@@ -8,6 +8,7 @@ export * from "./function";
 export * from "./point";
 export * from "./vector";
 export * from "./polar";
+export * from "./superellipse";
 
 /**
  * Render a Cartesian axis on the canvas.

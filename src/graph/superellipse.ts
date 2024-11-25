@@ -6,14 +6,25 @@ import { Color } from "~/shared";
  * Draws a superellipse on the canvas.
  * |(x-k)/r_x|^d + |(y-h)/r_y|^d = 1
  */
-export const superellipse = (ctx: CanvasRenderingContext2D, k: number, h: number, radiusX: number, degree: number, color: Color, weight = 1, radiusY = radiusX) => {
+export const superellipse = (
+    ctx: CanvasRenderingContext2D,
+    k: number,
+    h: number,
+    radiusX: number,
+    degree: number,
+    color: Color,
+    weight = 1,
+    radiusY = radiusX,
+    bounds = 2 * Math.PI,
+    precision = 0.01
+) => {
     ctx.beginPath();
 
     ctx.strokeStyle = parseColor(color);
 
     const points: [number, number][] = [];
 
-    for (let t = 0; t < 3 * Math.PI; t += 0.01) {
+    for (let t = 0; t < bounds; t += precision) {
         const x = k + radiusX * Math.sign(Math.cos(t)) * Math.abs(Math.cos(t)) ** (2 / degree);
         const y = h + radiusY * Math.sign(Math.sin(t)) * Math.abs(Math.sin(t)) ** (2 / degree);
 
