@@ -6,7 +6,7 @@ import { fn } from "./function";
  * y=mx+b
  */
 export const linearFunction = (ctx: CanvasRenderingContext2D, m: number, b: number, color: Color, weight = 1) => {
-    const fun = (x: number) => -1 * m * x + b;
+    const fun = (x: number) => m * x + b;
 
     fn(ctx, fun, color, weight);
 };
