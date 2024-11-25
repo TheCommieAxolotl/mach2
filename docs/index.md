@@ -21,7 +21,7 @@ features:
     details: Manages your canvas' rendering lifecycle for you, so you can focus on what you want to draw.
     icon: 🔄
   - title: Lightweight
-    details: Weighing in at just 11KB, mach2 is a lightweight library that won't slow down your website.
+    details: Weighing in at just ~80KB, mach2 is a lightweight library that won't slow down your websites or visualisations.
     icon: 🏋
   - title: Easy Animation
     details: Provides simple primitives for animations, so you can animate your renderings.

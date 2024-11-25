@@ -11,7 +11,7 @@ A speedy, lightweight, and typesafe canvas rendering and lifecycle management li
 
 - **Mathematical Rendering**: Provides a multitude of mathematical functions for rendering, and allows you to graph them with ease.
 - **Lifecycle Management**: Manages your canvas' rendering lifecycle for you, so you can focus on what you want to draw.
-- **Lightweight**: Weighing in at just 11KB, mach2 is a lightweight library that won't slow down your website.
+- **Lightweight**: Weighing in at just ~80KB, mach2 is a lightweight library that won't slow down your websites or visualisations.
 - **Typesafe**: Written in TypeScript, mach2 provides type safety for your canvas rendering.
 - **Easy Animation**: Provides simple primitives for animations, so you can animate your renderings.
 
