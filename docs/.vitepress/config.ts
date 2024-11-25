@@ -40,6 +40,8 @@ export default defineConfig({
                 items: [
                     { text: "Functions", link: "/graphing/functions" },
                     { text: "Dealing with Coordinates", link: "/graphing/coordinates" },
+                    { text: "Vectors", link: "/graphing/vectors" },
+                    { text: "Polynomials", link: "/graphing/polynomials" },
                 ],
             },
         ],

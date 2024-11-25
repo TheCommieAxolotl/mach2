@@ -1,5 +1,5 @@
 import { parseColor } from "~/color";
-import { cartesianToCanvas, lerp, Point } from "~/math";
+import { cartesianToCanvas, Point } from "~/math";
 import { Color } from "~/shared";
 
 /**

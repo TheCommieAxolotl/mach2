@@ -32,13 +32,17 @@ export const polynomial = (ctx: CanvasRenderingContext2D, coefficients: number[]
  * polynomialFromRoots(ctx, [1, 2, 3], "red", 2);
  */
 export const polynomialFromRoots = (ctx: CanvasRenderingContext2D, roots: number[], color: Color, weight = 1) => {
-    const coefficients = roots.map((root) => {
-        return -root;
-    });
+    const fun = (x: number) => {
+        let y = 1;
 
-    coefficients.push(1);
+        for (let i = 0; i < roots.length; i++) {
+            y *= x - roots[i];
+        }
 
-    polynomial(ctx, coefficients, color, weight);
+        return y;
+    };
+
+    fn(ctx, fun, color, weight);
 };
 
 /**
