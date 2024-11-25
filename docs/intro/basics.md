@@ -87,49 +87,53 @@ scene.add(
 <!-- Now that you've learned the basics of Mach2, you can move on to more advanced topics like [functions](/graphing/functions), [animations](/intro/animations), and [interactivity](/intro/interactivity). -->
 Now that you've learned the basics of Mach2, you can move on to more advanced topics like [functions](/graphing/functions).
 
-<script>
+
+<script setup>
     import mach2 from 'mach2';
+    import { onMounted } from 'vue'
 
-    // vue will await this script, so we need to async load the canvas
-    setTimeout(() => {
-        const canvas = document.getElementById('example1');
+    onMounted(() => {
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
 
-        if (canvas) {
-            const scene = mach2.scene(canvas);
+            if (canvas) {
+                const scene = mach2.scene(canvas);
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx);
+                            mach2.graph.axis(this.ctx);
 
-                        mach2.graph.linearFunction(this.ctx, this.frame / 100, 0, 'white', 4);
+                            mach2.graph.linearFunction(this.ctx, this.frame / 100, 0, 'white', 4);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas2 = document.getElementById('example2');
+            const canvas2 = document.getElementById('example2');
 
-        if (canvas2) {
-            const scene2 = mach2.scene(canvas2);
+            if (canvas2) {
+                const scene2 = mach2.scene(canvas2);
 
-            scene2.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene2.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx);
+                            mach2.graph.axis(this.ctx);
 
-                        mach2.graph.linearFunction(this.ctx, 1, 0, 'white', 4);
+                            mach2.graph.linearFunction(this.ctx, 1, 0, 'white', 4);
+                        }
                     }
-                }
-            );
+                );
 
-            scene2.start();
-        }
-    }, 0)
+                scene2.start();
+            }
+        }, 0)
+    })
 </script>

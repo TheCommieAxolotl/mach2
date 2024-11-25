@@ -88,30 +88,34 @@ scene.add(
     <canvas class="mach2" id="example1"></canvas>
 </div>
 
-<script>
+
+<script setup>
     import mach2 from 'mach2';
+    import { onMounted } from 'vue'
 
-    // vue will await this script, so we need to async load the canvas
-    setTimeout(() => {
-        const canvas = document.getElementById('example1');
+    onMounted(() => {
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
 
-        if (canvas) {
-            const scene = mach2.scene(canvas);
+            if (canvas) {
+                const scene = mach2.scene(canvas);
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        mach2.graph.axis(this.ctx)
-                        mach2.graph.fn(this.ctx, (x) => x ** 2, 'white', 4)
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            mach2.graph.axis(this.ctx)
+                            mach2.graph.fn(this.ctx, (x) => x ** 2, 'white', 4)
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        } else {
-            console.error('Canvas element not found');
-        }
-    }, 0)
+                scene.start();
+            } else {
+                console.error('Canvas element not found');
+            }
+        }, 0)
+    })
 </script>
 
 ## Next Steps

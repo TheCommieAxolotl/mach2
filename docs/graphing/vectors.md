@@ -48,74 +48,77 @@ mach2.graph.vector(this.ctx, [
     <canvas class="mach2" id="example2"></canvas>
 </div>
 
-<script>
+<script setup>
     import mach2 from 'mach2';
+    import { onMounted } from 'vue'
 
-    const darkmode = document.querySelector('html').classList.contains('dark');
+    onMounted(() => {
+        const darkmode = document.querySelector('html').classList.contains('dark');
 
-    const bg = darkmode ? mach2.color.black : mach2.color.white;
-    const foreground = darkmode ? mach2.color.white : mach2.color.black;
+        const bg = darkmode ? mach2.color.black : mach2.color.white;
+        const foreground = darkmode ? mach2.color.white : mach2.color.black;
 
-    // vue will await this script, so we need to async load the canvas
-    setTimeout(() => {
-        const canvas = document.getElementById('example1');
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
 
-        if (canvas) {
-            const scene = mach2.scene(canvas, {
-                background: bg
-            });
+            if (canvas) {
+                const scene = mach2.scene(canvas, {
+                    background: bg
+                });
 
-            scene.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.vector(this.ctx, [
-                            [0, 0],
-                            [2, 4]
-                        ], mach2.color.red, 4);
+                            mach2.graph.vector(this.ctx, [
+                                [0, 0],
+                                [2, 4]
+                            ], mach2.color.red, 4);
 
-                        mach2.graph.point(this.ctx, 2, 4, mach2.color.red, undefined, undefined, undefined, foreground);
+                            mach2.graph.point(this.ctx, 2, 4, mach2.color.red, undefined, undefined, undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas2 = document.getElementById('example2');
+            const canvas2 = document.getElementById('example2');
 
-        if (canvas2) {
-            const scene = mach2.scene(canvas2, {
-                background: bg
-            });
+            if (canvas2) {
+                const scene = mach2.scene(canvas2, {
+                    background: bg
+                });
 
-            scene.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        const magnitude = 5;
-                        const direction = -Math.PI / 4;
+                            const magnitude = 5;
+                            const direction = -Math.PI / 4;
 
-                        const x = magnitude * Math.cos(direction);
-                        const y = magnitude * Math.sin(direction);
+                            const x = magnitude * Math.cos(direction);
+                            const y = magnitude * Math.sin(direction);
 
-                        mach2.graph.vector(this.ctx, [
-                            [0, 0],
-                            [x, y]
-                        ], mach2.color.yellow, 4);
+                            mach2.graph.vector(this.ctx, [
+                                [0, 0],
+                                [x, y]
+                            ], mach2.color.yellow, 4);
 
-                        mach2.graph.point(this.ctx, x, y, mach2.color.yellow, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, x, y, mach2.color.yellow, undefined, undefined, 'bottom', foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
-    }, 0)
+                scene.start();
+            }
+        }, 0)
+    })
 </script>

@@ -198,209 +198,212 @@ mach2.graph.polar(this.ctx, (theta) => Math.sqrt(10 * Math.cos(2 * theta)), mach
     <canvas class="mach2" id="example8"></canvas>
 </div>
 
-<script>
+<script setup>
     import mach2 from 'mach2';
+    import { onMounted } from 'vue'
 
-    const darkmode = document.querySelector('html').classList.contains('dark');
+    onMounted(() => {
+        const darkmode = document.querySelector('html').classList.contains('dark');
 
-    const bg = darkmode ? mach2.color.black : mach2.color.white;
-    const foreground = darkmode ? mach2.color.white : mach2.color.black;
+        const bg = darkmode ? mach2.color.black : mach2.color.white;
+        const foreground = darkmode ? mach2.color.white : mach2.color.black;
 
-    // vue will await this script, so we need to async load the canvas
-    setTimeout(() => {
-        const canvas = document.getElementById('example1');
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
 
-        if (canvas) {
-            const scene2 = mach2.scene(canvas, {
-                background: bg
-            });
+            if (canvas) {
+                const scene2 = mach2.scene(canvas, {
+                    background: bg
+                });
 
-            scene2.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene2.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.point(this.ctx, 0, 0, mach2.color.green, '(0, 0)', 'left', 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 0, 0, mach2.color.green, '(0, 0)', 'left', 'bottom', foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene2.start();
-        }
+                scene2.start();
+            }
 
-        const canvas2 = document.getElementById('example2');
+            const canvas2 = document.getElementById('example2');
 
-        if (canvas2) {
-            const scene = mach2.scene(canvas2, {
-                background: bg
-            });;
+            if (canvas2) {
+                const scene = mach2.scene(canvas2, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.linearFunction(this.ctx, 2, 3, mach2.color.red, 4);
+                            mach2.graph.linearFunction(this.ctx, 2, 3, mach2.color.red, 4);
 
-                        mach2.graph.point(this.ctx, 0, 3, mach2.color.red, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, -1.5, 0, mach2.color.red, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 0, 3, mach2.color.red, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, -1.5, 0, mach2.color.red, undefined, 'left', undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas3 = document.getElementById('example3');
+            const canvas3 = document.getElementById('example3');
 
-        if (canvas3) {
-            const scene = mach2.scene(canvas3, {
-                background: bg
-            });;
+            if (canvas3) {
+                const scene = mach2.scene(canvas3, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.quadraticFunction(this.ctx, 1, 0, -1, mach2.color.blue, 4);
+                            mach2.graph.quadraticFunction(this.ctx, 1, 0, -1, mach2.color.blue, 4);
 
-                        mach2.graph.point(this.ctx, 0, -1, mach2.color.blue, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 1, 0, mach2.color.blue, undefined, 'left', undefined, foreground);
-                        mach2.graph.point(this.ctx, -1, 0, mach2.color.blue, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 0, -1, mach2.color.blue, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 1, 0, mach2.color.blue, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, -1, 0, mach2.color.blue, undefined, 'left', undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas4 = document.getElementById('example4');
+            const canvas4 = document.getElementById('example4');
 
-        if (canvas4) {
-            const scene = mach2.scene(canvas4, {
-                background: bg
-            });;
+            if (canvas4) {
+                const scene = mach2.scene(canvas4, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.cubicFunction(this.ctx, 1, 0, 0, -1, mach2.color.purple, 4);
+                            mach2.graph.cubicFunction(this.ctx, 1, 0, 0, -1, mach2.color.purple, 4);
 
-                        mach2.graph.point(this.ctx, 0, -1, mach2.color.purple, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 1, 0, mach2.color.purple, undefined, 'left', undefined, foreground);
-                        mach2.graph.point(this.ctx, -1, -2, mach2.color.purple, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 0, -1, mach2.color.purple, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 1, 0, mach2.color.purple, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, -1, -2, mach2.color.purple, undefined, 'left', undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas5 = document.getElementById('example5');
+            const canvas5 = document.getElementById('example5');
 
-        if (canvas5) {
-            const scene = mach2.scene(canvas5, {
-                background: bg
-            });;
+            if (canvas5) {
+                const scene = mach2.scene(canvas5, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.exponentialFunction(this.ctx, 1, 2, mach2.color.orange, 4);
+                            mach2.graph.exponentialFunction(this.ctx, 1, 2, mach2.color.orange, 4);
 
-                        mach2.graph.point(this.ctx, 0, 1, mach2.color.orange, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 1, 2, mach2.color.orange, undefined, 'left', undefined, foreground);
-                        mach2.graph.point(this.ctx, -1, 0.5, mach2.color.orange, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 0, 1, mach2.color.orange, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 1, 2, mach2.color.orange, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, -1, 0.5, mach2.color.orange, undefined, 'left', undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas6 = document.getElementById('example6');
+            const canvas6 = document.getElementById('example6');
 
-        if (canvas6) {
-            const scene = mach2.scene(canvas6, {
-                background: bg
-            });;
+            if (canvas6) {
+                const scene = mach2.scene(canvas6, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.logarithmicFunction(this.ctx, 1, 2, mach2.color.yellow, 4);
+                            mach2.graph.logarithmicFunction(this.ctx, 1, 2, mach2.color.yellow, 4);
 
-                        mach2.graph.point(this.ctx, 1, 0, mach2.color.yellow, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 2, 1, mach2.color.yellow, undefined, 'left', undefined, foreground);
-                        mach2.graph.point(this.ctx, 0.5, -1, mach2.color.yellow, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 1, 0, mach2.color.yellow, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 2, 1, mach2.color.yellow, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 0.5, -1, mach2.color.yellow, undefined, 'left', undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas7 = document.getElementById('example7');
+            const canvas7 = document.getElementById('example7');
 
-        if (canvas7) {
-            const scene = mach2.scene(canvas7, {
-                background: bg
-            });;
+            if (canvas7) {
+                const scene = mach2.scene(canvas7, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.fn(this.ctx, (x) => Math.sin(x), mach2.color.pink, 4);
+                            mach2.graph.fn(this.ctx, (x) => Math.sin(x), mach2.color.pink, 4);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas8 = document.getElementById('example8');
+            const canvas8 = document.getElementById('example8');
 
-        if (canvas8) {
-            const scene = mach2.scene(canvas8, {
-                background: bg
-            });;
+            if (canvas8) {
+                const scene = mach2.scene(canvas8, {
+                    background: bg
+                });;
 
-            scene.add(
-                new class extends mach2.Dynamic {
-                    update() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        update() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.polar(this.ctx, (theta) => Math.sqrt(10 * Math.cos(2 * theta)), mach2.color.green, 4);
+                            mach2.graph.polar(this.ctx, (theta) => Math.sqrt(10 * Math.cos(2 * theta)), mach2.color.green, 4);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
-    }, 0)
+                scene.start();
+            }
+        }, 0)
+    })
 </script>

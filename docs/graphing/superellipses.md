@@ -45,38 +45,41 @@ mach2.graph.superellipse(this.ctx, 0, 0, 5, 4, mach2.colors.blue, 2);
     <canvas class="mach2" id="example1"></canvas>
 </div>
 
-<script>
+<script setup>
     import mach2 from 'mach2';
+    import { onMounted } from 'vue'
 
-    const darkmode = document.querySelector('html').classList.contains('dark');
+    onMounted(() => {
+        const darkmode = document.querySelector('html').classList.contains('dark');
 
-    const bg = darkmode ? mach2.color.black : mach2.color.white;
-    const foreground = darkmode ? mach2.color.white : mach2.color.black;
+        const bg = darkmode ? mach2.color.black : mach2.color.white;
+        const foreground = darkmode ? mach2.color.white : mach2.color.black;
 
-    // vue will await this script, so we need to async load the canvas
-    setTimeout(() => {
-        const canvas = document.getElementById('example1');
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
 
-        if (canvas) {
-            const scene2 = mach2.scene(canvas, {
-                background: bg
-            });
+            if (canvas) {
+                const scene2 = mach2.scene(canvas, {
+                    background: bg
+                });
 
-            scene2.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene2.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.superellipse(this.ctx, 0, 0, 5, 1, mach2.color.green, 2);
-                        mach2.graph.superellipse(this.ctx, 0, 0, 5, 2, mach2.color.red, 2);
-                        mach2.graph.superellipse(this.ctx, 0, 0, 5, 4, mach2.color.blue, 2);
+                            mach2.graph.superellipse(this.ctx, 0, 0, 5, 1, mach2.color.green, 2);
+                            mach2.graph.superellipse(this.ctx, 0, 0, 5, 2, mach2.color.red, 2);
+                            mach2.graph.superellipse(this.ctx, 0, 0, 5, 4, mach2.color.blue, 2);
+                        }
                     }
-                }
-            );
+                );
 
-            scene2.start();
-        }
-    }, 0)
+                scene2.start();
+            }
+        }, 0)
+    })
 </script>

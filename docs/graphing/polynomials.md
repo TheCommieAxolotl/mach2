@@ -68,7 +68,7 @@ Will graph the polynomial which passes through the points $(0, 1)$, $(1, 0)$, $(
 </div>
 
     
-<script>
+<script setup>
     import mach2 from 'mach2';
 
     const darkmode = document.querySelector('html').classList.contains('dark');
