@@ -28,7 +28,7 @@ export const registerEvents = (cavnas: HTMLCanvasElement, scroll: boolean, move:
         let isPanning = false;
         let initialMousePosition = { x: 0, y: 0 };
 
-        window.addEventListener("mousedown", (e) => {
+        cavnas.addEventListener("mousedown", (e) => {
             if (e.button === 0) {
                 isPanning = true;
                 initialMousePosition = { x: e.clientX, y: e.clientY };
