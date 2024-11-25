@@ -20,7 +20,8 @@ export const point = (
     color?: Color,
     label?: string | LatexRenderingContext,
     positionX: HorizontalPosition = "right",
-    positionY: VerticalPosition = "top"
+    positionY: VerticalPosition = "top",
+    foregroundColor?: Color
 ) => {
     let opacity = 1;
 
@@ -60,14 +61,18 @@ export const point = (
 
         const [x, y] = canvasToCartesian(ctx, tx, ty);
 
-        label.render(x, y, `rgba(255,255,255, ${opacity})`, positionX ?? "right", positionY ?? "top");
+        label.render(x, y, parseColor(foregroundColor) || `rgba(255,255,255, ${opacity})`, positionX ?? "right", positionY ?? "top");
     } else {
-        ctx.fillStyle = `rgba(255,255,255, ${opacity})`;
+        ctx.fillStyle = parseColor(foregroundColor) || `rgba(255,255,255, ${opacity})`;
 
-        const tx = typeof positionX === "number" ? lerp(canvas[0] - 10, canvas[0] + 10, positionX) : positionX === "left" ? canvas[0] - 10 : canvas[0] + 10;
+        const roundedX = Math.round(x * 100) / 100;
+        const roundedY = Math.round(y * 100) / 100;
+
+        const tx =
+            typeof positionX === "number" ? lerp(canvas[0] - 10, canvas[0] + 10, positionX) : positionX === "left" ? canvas[0] - 12 * (label || `(${roundedX}, ${roundedY})`).length : canvas[0] + 10;
         const ty = typeof positionY === "number" ? lerp(canvas[1] - 15, canvas[1] + 32, positionY) : positionY === "top" ? canvas[1] - 15 : canvas[1] + 32;
 
-        ctx.fillText(label ?? `(${x.toFixed(2)}, ${y.toFixed(2)})`, tx, ty);
+        ctx.fillText(label ?? `(${roundedX}, ${roundedY})`, tx, ty);
     }
     ctx.closePath();
 };
