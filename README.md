@@ -2,7 +2,7 @@
 
 A speedy, lightweight, and typesafe canvas rendering and lifecycle management library.
 
-![Three windows are open in a grid layout. The leftmost window shows the graphs of four trigonometric functions, the top right window shows a x-y representation of a Lorenz attractor, and the lower right window shows a rendering of the Mandelbrot set.](./assets//demo.png)
+![Three windows are open in a grid layout. The leftmost window shows the graphs of four trigonometric functions, the top right window shows a x-y representation of a Lorenz attractor, and the lower right window shows a rendering of the Mandelbrot set.](https://raw.githubusercontent.com/TheCommieAxolotl/mach2/refs/heads/main/assets/demo.png)
 
 > Graphs of $f(x) = \sin(x) + \cos\Bigl(\frac{x}{2}\Bigr) + \cos\Bigl(\frac{x}{3}\Bigr) + \cos(2x)$.
 > x-y rendering of a Lorentz attractor, and a rendering of the Mandelbrot set.
