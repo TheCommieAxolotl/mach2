@@ -68,7 +68,7 @@ scene.add(
 
                 mach2.draw.point(this.ctx, states[i][0], states[i][1], colors[i], 2);
 
-                mach2.graph.vector(
+                mach2.graph.segment(
                     this.ctx,
                     points[i]?.map(([x, y]) => [x, y]),
                     mach2.color.objectOpacity(colors[i], 0.8),

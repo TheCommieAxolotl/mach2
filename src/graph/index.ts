@@ -6,9 +6,10 @@ export * from "./common";
 export * from "./polynomial";
 export * from "./function";
 export * from "./point";
-export * from "./vector";
+export * from "./segment";
 export * from "./polar";
 export * from "./superellipse";
+export * from "./vector";
 
 /**
  * Render a Cartesian axis on the canvas.
