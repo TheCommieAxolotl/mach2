@@ -70,95 +70,98 @@ Will graph the polynomial which passes through the points $(0, 1)$, $(1, 0)$, $(
     
 <script setup>
     import mach2 from 'mach2';
+    import { onMounted } from 'vue'
 
-    const darkmode = document.querySelector('html').classList.contains('dark');
+    onMounted(() => {
+        const darkmode = document.querySelector('html').classList.contains('dark');
 
-    const bg = darkmode ? mach2.color.black : mach2.color.white;
-    const foreground = darkmode ? mach2.color.white : mach2.color.black;
+        const bg = darkmode ? mach2.color.black : mach2.color.white;
+        const foreground = darkmode ? mach2.color.white : mach2.color.black;
 
-    // vue will await this script, so we need to async load the canvas
-    setTimeout(() => {
-        const canvas = document.getElementById('example1');
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
 
-        if (canvas) {
-            const scene = mach2.scene(canvas, {
-                background: bg
-            });
+            if (canvas) {
+                const scene = mach2.scene(canvas, {
+                    background: bg
+                });
 
-            scene.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.polynomial(this.ctx, [1, 0, -1], mach2.color.red, 4, undefined, undefined, undefined, foreground);
+                            mach2.graph.polynomial(this.ctx, [1, 0, -1], mach2.color.red, 4, undefined, undefined, undefined, foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas2 = document.getElementById('example2');
+            const canvas2 = document.getElementById('example2');
 
-        if (canvas2) {
-            const scene = mach2.scene(canvas2, {
-                background: bg
-            });
+            if (canvas2) {
+                const scene = mach2.scene(canvas2, {
+                    background: bg
+                });
 
-            scene.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.polynomialFromRoots(this.ctx, [2, 1, -1], mach2.color.blue, 4);
+                            mach2.graph.polynomialFromRoots(this.ctx, [2, 1, -1], mach2.color.blue, 4);
 
-                        mach2.graph.point(this.ctx, 2, 0, mach2.color.blue, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 1, 0, mach2.color.blue, undefined, undefined, undefined, foreground);
-                        mach2.graph.point(this.ctx, -1, 0, mach2.color.blue, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 2, 0, mach2.color.blue, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 1, 0, mach2.color.blue, undefined, undefined, undefined, foreground);
+                            mach2.graph.point(this.ctx, -1, 0, mach2.color.blue, undefined, undefined, 'bottom', foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
+                scene.start();
+            }
 
-        const canvas3 = document.getElementById('example3');
+            const canvas3 = document.getElementById('example3');
 
-        if (canvas3) {
-            const scene = mach2.scene(canvas3, {
-                background: bg
-            });
+            if (canvas3) {
+                const scene = mach2.scene(canvas3, {
+                    background: bg
+                });
 
-            scene.add(
-                new class extends mach2.Static {
-                    mount() {
-                        if (!this.ctx) return;
+                scene.add(
+                    new class extends mach2.Static {
+                        mount() {
+                            if (!this.ctx) return;
 
-                        mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
+                            mach2.graph.axis(this.ctx, undefined, mach2.color.opacity(foreground, 0.4));
 
-                        mach2.graph.polynomialFromPoints(this.ctx, [
-                            [0, 1],
-                            [1, 0],
-                            [2, 1],
-                            [3, 0],
-                            [4, 1]
-                        ], mach2.color.pink, 4);
+                            mach2.graph.polynomialFromPoints(this.ctx, [
+                                [0, 1],
+                                [1, 0],
+                                [2, 1],
+                                [3, 0],
+                                [4, 1]
+                            ], mach2.color.pink, 4);
 
-                        mach2.graph.point(this.ctx, 0, 1, mach2.color.pink, undefined, 'left', 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 1, 0, mach2.color.pink, undefined, undefined, 'bottom', foreground);
-                        mach2.graph.point(this.ctx, 2, 1, mach2.color.pink, undefined, undefined, 'top', foreground);
-                        mach2.graph.point(this.ctx, 3, 0, mach2.color.pink, undefined, 'left', undefined, foreground);
-                        mach2.graph.point(this.ctx, 4, 1, mach2.color.pink, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 0, 1, mach2.color.pink, undefined, 'left', 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 1, 0, mach2.color.pink, undefined, undefined, 'bottom', foreground);
+                            mach2.graph.point(this.ctx, 2, 1, mach2.color.pink, undefined, undefined, 'top', foreground);
+                            mach2.graph.point(this.ctx, 3, 0, mach2.color.pink, undefined, 'left', undefined, foreground);
+                            mach2.graph.point(this.ctx, 4, 1, mach2.color.pink, undefined, undefined, 'bottom', foreground);
+                        }
                     }
-                }
-            );
+                );
 
-            scene.start();
-        }
-    }, 0);
+                scene.start();
+            }
+        }, 0);
+    })
 </script>
 
