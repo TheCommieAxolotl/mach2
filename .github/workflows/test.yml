@@ -11,6 +11,7 @@ on:
             - vite.config.ts
             - vitest.config.ts
             - vitest.setup.ts
+            - .github/workflows/**
     workflow_dispatch:
 
 jobs:
