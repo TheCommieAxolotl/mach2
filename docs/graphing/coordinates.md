@@ -9,7 +9,7 @@ Mach2 has a few different coordinate systems used internally, and sometimes you 
 ## Coordinate Systems
 ### DOM Coordinates
 
-The most basic coordinate system is the DOM coordinate system. This is the same as the browser's coordinate system, with the origin at the top left of the window, and the y-axis increasing downwards. DOM coordinates do not the position of the canvas on the page, so no matter what, (0,0) will always be the top left of the window.
+The most basic coordinate system is the DOM coordinate system. This is the same as the browser's coordinate system, with the origin at the top left of the window, and the y-axis increasing downwards. DOM coordinates do not account for the position of the canvas on the page, so no matter what, (0,0) will always be the top left of the window.
 
 ### Canvas Coordinates
 
