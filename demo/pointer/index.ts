@@ -2,7 +2,7 @@ import mach2 from "mach2";
 
 const scene = mach2.scene(document.querySelector("canvas") as HTMLCanvasElement, {
     debug: true,
-    interactivity: false,
+    interactive: false,
 });
 
 let pointerX = 0;

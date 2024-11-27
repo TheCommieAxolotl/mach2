@@ -10,7 +10,7 @@ export type SceneOptions = {
     resolution: number;
     zoom: number;
     background: Color;
-    interactivity:
+    interactive:
         | boolean
         | {
               scroll: boolean;
@@ -26,7 +26,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
         debug: false,
         resolution: 2,
         zoom: 60,
-        interactivity: true,
+        interactive: true,
         background: "#000000",
         ...options,
     };
@@ -137,8 +137,8 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 
     window.addEventListener("resize", listener);
 
-    if (settings.interactivity) {
-        const { scroll, move } = typeof settings.interactivity === "boolean" ? { scroll: true, move: true } : settings.interactivity;
+    if (settings.interactive) {
+        const { scroll, move } = typeof settings.interactive === "boolean" ? { scroll: true, move: true } : settings.interactive;
         registerEvents(canvas, scroll, move);
     }
 

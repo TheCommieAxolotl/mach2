@@ -3,7 +3,7 @@ import "katex/dist/katex.min.css";
 
 const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasElement, {
     background: mach2.color.white,
-    interactivity: false,
+    interactive: false,
 });
 
 const latex = await mach2.latex.createLatexRenderingContext(scene.ctx, `\\sin(x)=x\\cdot\\prod_{n=1}^{\\infty}\\Bigl(1-\\frac{x^2}{n^2\\pi^2}\\Bigr)`);

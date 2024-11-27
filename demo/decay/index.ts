@@ -3,7 +3,7 @@ import mach2 from "mach2";
 const runSimulation = (atomCount = 1000, probability = 0.01) => {
     const scene = mach2.scene(document.querySelector("canvas#scene") as HTMLCanvasElement, {
         debug: true,
-        interactivity: false,
+        interactive: false,
     });
 
     class Atom extends mach2.Dynamic {
