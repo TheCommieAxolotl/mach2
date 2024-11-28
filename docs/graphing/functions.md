@@ -26,6 +26,7 @@ The most basic function-graphing utility is `mach2.graph.point`. This function t
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.point(this.ctx, 0, 0, mach2.color.green, '(0, 0)', 'left', 'bottom');
@@ -34,7 +35,6 @@ mach2.graph.point(this.ctx, 0, 0, mach2.color.green, '(0, 0)', 'left', 'bottom')
 <div class="canvas">
     <canvas class="mach2" id="example1"></canvas>
 </div>
-
 
 ## Linear Functions
 
@@ -48,9 +48,9 @@ To graph a linear function, you can use the `mach2.graph.linearFunction` utility
 - `color`: The color of the line (default: `white`).
 - `weight`: The width of the line (default: `1`).
 
-
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.linearFunction(this.ctx, 2, 3, mach2.color.red, 4);
@@ -75,6 +75,7 @@ To graph a quadratic function, you can use the `mach2.graph.quadraticFunction` u
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.quadraticFunction(this.ctx, 1, 0, -1, mach2.color.blue, 4);
@@ -100,6 +101,7 @@ To graph a cubic function, you can use the `mach2.graph.cubicFunction` utility. 
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.cubicFunction(this.ctx, 1, 0, 0, -1, mach2.color.purple, 4);
@@ -123,6 +125,7 @@ To graph an exponential function, you can use the `mach2.graph.exponentialFuncti
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.exponentialFunction(this.ctx, 1, 2, mach2.color.orange, 4);
@@ -146,6 +149,7 @@ To graph a logarithmic function, you can use the `mach2.graph.logarithmicFunctio
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.logarithmicFunction(this.ctx, 1, 2, mach2.color.yellow, 4);
@@ -168,10 +172,12 @@ You can also graph **any** function by using the `mach2.graph.fn` utility. This 
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.fn(this.ctx, (x) => Math.sin(x), mach2.color.pink, 4);
 ```
+
 <div class="canvas">
     <canvas class="mach2" id="example7"></canvas>
 </div>
@@ -189,6 +195,7 @@ You can also graph **polar** functions by using the `mach2.graph.polar` utility.
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.polar(this.ctx, (theta) => Math.sqrt(10 * Math.cos(2 * theta)), mach2.color.green, 4);

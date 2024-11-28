@@ -16,6 +16,7 @@ The `mach2.graph.polynomial` function takes a number of coefficients, and graphs
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.polynomial(this.ctx, [1, 0, -1], mach2.color.red, 4);
@@ -33,6 +34,7 @@ The `mach2.graph.polynomialFromRoots` function takes a list of roots, and graphs
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // --cut-before--
 mach2.graph.polynomialFromRoots(this.ctx, [2, 1, -1], mach2.color.blue, 4);
@@ -50,15 +52,21 @@ The `mach2.graph.polynomialFromPoints` function takes a list of points, and grap
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // @ts-ignore
 // --cut-before--
-mach2.graph.polynomialFromPoints(this.ctx, [
-    [0, 1],
-    [1, 0],
-    [2, 1],
-    [3, 0],
-    [4, 1]
-], mach2.color.pink, 4);
+mach2.graph.polynomialFromPoints(
+	this.ctx,
+	[
+		[0, 1],
+		[1, 0],
+		[2, 1],
+		[3, 0],
+		[4, 1]
+	],
+	mach2.color.pink,
+	4
+);
 ```
 
 Will graph the polynomial which passes through the points $(0, 1)$, $(1, 0)$, $(2, 1)$, $(3, 0)$, and $(4, 1)$:
@@ -67,7 +75,6 @@ Will graph the polynomial which passes through the points $(0, 1)$, $(1, 0)$, $(
     <canvas class="mach2" id="example3"></canvas>
 </div>
 
-    
 <script setup>
     import mach2 from 'mach2';
     import { onMounted } from 'vue'
@@ -164,4 +171,3 @@ Will graph the polynomial which passes through the points $(0, 1)$, $(1, 0)$, $(
         }, 0);
     })
 </script>
-

@@ -42,16 +42,15 @@ const canvas = document.getElementById('canvas') as HTMLCanvasElement;
 const scene = mach2.scene(canvas);
 
 scene.add([
-    // add a new static object
-    new class extends mach2.Static {
-        mount() {
-            // render cartesian axis
-            mach2.graph.axis(this.ctx);
+	// add a new static object
+	new (class extends mach2.Static {
+		mount() {
+			// render cartesian axis
+			mach2.graph.axis(this.ctx);
 
-            // graph a parabola
-            mach2.graph.fn(this.ctx, (x) => x**2, 'red', 2);
-        }
-    }
-])
+			// graph a parabola
+			mach2.graph.fn(this.ctx, (x) => x ** 2, 'red', 2);
+		}
+	})()
+]);
 ```
-

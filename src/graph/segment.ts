@@ -1,6 +1,6 @@
-import { parseColor } from "~/color";
-import { cartesianToCanvas, Point } from "~/math";
-import { Color } from "~/shared";
+import { parseColor } from '~/color';
+import { Point, cartesianToCanvas } from '~/math';
+import { Color } from '~/shared';
 
 /**
  * Renders a segment on the canvas.
@@ -10,24 +10,29 @@ import { Color } from "~/shared";
  * @param color - The color of the segment.
  * @param width - The width of the segment.
  */
-export const segment = (ctx: CanvasRenderingContext2D, points: Point[], color: Color, weight = 1) => {
-    if (!points.length) {
-        return;
-    }
+export const segment = (
+	ctx: CanvasRenderingContext2D,
+	points: Point[],
+	color: Color,
+	weight = 1
+) => {
+	if (!points.length) {
+		return;
+	}
 
-    const initial = cartesianToCanvas(ctx, ...points[0]);
+	const initial = cartesianToCanvas(ctx, ...points[0]);
 
-    ctx.beginPath();
-    ctx.moveTo(initial[0], initial[1]);
+	ctx.beginPath();
+	ctx.moveTo(initial[0], initial[1]);
 
-    for (let i = 1; i < points.length; i++) {
-        const [x, y] = cartesianToCanvas(ctx, ...points[i]);
-        ctx.lineTo(x, y);
-    }
+	for (let i = 1; i < points.length; i++) {
+		const [x, y] = cartesianToCanvas(ctx, ...points[i]);
+		ctx.lineTo(x, y);
+	}
 
-    ctx.strokeStyle = parseColor(color);
-    ctx.lineWidth = weight;
-    ctx.stroke();
+	ctx.strokeStyle = parseColor(color);
+	ctx.lineWidth = weight;
+	ctx.stroke();
 };
 
 /**
@@ -38,34 +43,39 @@ export const segment = (ctx: CanvasRenderingContext2D, points: Point[], color: C
  * @param color - The color of the segment.
  * @param weight - The width of the segment.
  */
-export const curveSegment = (ctx: CanvasRenderingContext2D, points: Point[], color: Color, weight = 1) => {
-    if (!points.length) {
-        return;
-    }
+export const curveSegment = (
+	ctx: CanvasRenderingContext2D,
+	points: Point[],
+	color: Color,
+	weight = 1
+) => {
+	if (!points.length) {
+		return;
+	}
 
-    const initial = cartesianToCanvas(ctx, ...points[0]);
+	const initial = cartesianToCanvas(ctx, ...points[0]);
 
-    ctx.beginPath();
-    ctx.moveTo(...initial);
+	ctx.beginPath();
+	ctx.moveTo(...initial);
 
-    for (let i = 1; i < points.length - 2; i++) {
-        const cp1 = cartesianToCanvas(ctx, ...points[i]);
-        const cp2 = cartesianToCanvas(ctx, ...points[i + 1]);
-        const end = cartesianToCanvas(ctx, ...points[i + 2]);
+	for (let i = 1; i < points.length - 2; i++) {
+		const cp1 = cartesianToCanvas(ctx, ...points[i]);
+		const cp2 = cartesianToCanvas(ctx, ...points[i + 1]);
+		const end = cartesianToCanvas(ctx, ...points[i + 2]);
 
-        ctx.bezierCurveTo(...cp1, ...cp2, ...end);
-    }
+		ctx.bezierCurveTo(...cp1, ...cp2, ...end);
+	}
 
-    if (points.length > 2) {
-        const lastControlPoint = cartesianToCanvas(ctx, ...points[points.length - 2]);
-        const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1]);
-        ctx.quadraticCurveTo(...lastControlPoint, ...lastPoint);
-    } else {
-        const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1]);
-        ctx.lineTo(...lastPoint);
-    }
+	if (points.length > 2) {
+		const lastControlPoint = cartesianToCanvas(ctx, ...points[points.length - 2]);
+		const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1]);
+		ctx.quadraticCurveTo(...lastControlPoint, ...lastPoint);
+	} else {
+		const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1]);
+		ctx.lineTo(...lastPoint);
+	}
 
-    ctx.strokeStyle = parseColor(color);
-    ctx.lineWidth = weight;
-    ctx.stroke();
+	ctx.strokeStyle = parseColor(color);
+	ctx.lineWidth = weight;
+	ctx.stroke();
 };

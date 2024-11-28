@@ -7,6 +7,7 @@ outline: deep
 Mach2 is a speedy, lightweight, and typesafe canvas rendering and lifecycle management library.
 
 ## Installation
+
 ::: code-group
 
 ```sh [npm]
@@ -57,7 +58,7 @@ $ bun add -D katex
 
 Mach2 is designed to be used client-side. It relies on the `canvas` API, which is available in all modern browsers. Below is a simple example of how to use Mach2. Don't worry if you don't understand everything yet; we'll cover it all in the [API Documentation](/intro/basics).
 
-```ts twoslash 
+```ts twoslash
 import mach2 from 'mach2';
 
 // Get the canvas element from the DOM
@@ -69,25 +70,24 @@ const scene = mach2.scene(canvas as HTMLCanvasElement);
 console.log('hello');
 
 scene.add(
-    // Create a dynamic object, which will update every frame
-    new class extends mach2.Dynamic {
-        update() {
-            if (!this.ctx) return;
+	// Create a dynamic object, which will update every frame
+	new (class extends mach2.Dynamic {
+		update() {
+			if (!this.ctx) return;
 
-            // Show a basic cartesian axis
-            mach2.graph.axis(this.ctx);
+			// Show a basic cartesian axis
+			mach2.graph.axis(this.ctx);
 
-            // Draw a basic function
-            mach2.graph.fn(this.ctx, (x) => x ** 2, 'white', 4);
-        }
-    }
+			// Draw a basic function
+			mach2.graph.fn(this.ctx, (x) => x ** 2, 'white', 4);
+		}
+	})()
 );
 ```
 
 <div class="canvas">
     <canvas class="mach2" id="example1"></canvas>
 </div>
-
 
 <script setup>
     import mach2 from 'mach2';

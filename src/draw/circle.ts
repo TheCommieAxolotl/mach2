@@ -1,6 +1,6 @@
-import { parseColor } from "~/color";
-import { cartesianToCanvas } from "~/math";
-import { Color } from "~/shared";
+import { parseColor } from '~/color';
+import { cartesianToCanvas } from '~/math';
+import { Color } from '~/shared';
 
 /**
  * Draws a circle on the canvas.
@@ -10,15 +10,21 @@ import { Color } from "~/shared";
  * @param radius - radius of the circle
  * @param color  - color of the circle
  */
-export const circle = (ctx: CanvasRenderingContext2D, x: number, y: number, radius: number, color: Color) => {
-    ctx.beginPath();
+export const circle = (
+	ctx: CanvasRenderingContext2D,
+	x: number,
+	y: number,
+	radius: number,
+	color: Color
+) => {
+	ctx.beginPath();
 
-    const point = cartesianToCanvas(ctx, x, y);
+	const point = cartesianToCanvas(ctx, x, y);
 
-    ctx.arc(point[0], point[1], radius, 0, 2 * Math.PI);
-    ctx.fillStyle = parseColor(color);
-    ctx.fill();
-    ctx.closePath();
+	ctx.arc(point[0], point[1], radius, 0, 2 * Math.PI);
+	ctx.fillStyle = parseColor(color);
+	ctx.fill();
+	ctx.closePath();
 };
 
 /**
@@ -31,15 +37,23 @@ export const circle = (ctx: CanvasRenderingContext2D, x: number, y: number, radi
  * @param startAngle - start angle of the semi-circle
  * @param endAngle - end angle of the semi-circle
  */
-export const semiCircle = (ctx: CanvasRenderingContext2D, x: number, y: number, radius: number, color: Color, startAngle: number, endAngle: number) => {
-    ctx.beginPath();
+export const semiCircle = (
+	ctx: CanvasRenderingContext2D,
+	x: number,
+	y: number,
+	radius: number,
+	color: Color,
+	startAngle: number,
+	endAngle: number
+) => {
+	ctx.beginPath();
 
-    const point = cartesianToCanvas(ctx, x, y);
+	const point = cartesianToCanvas(ctx, x, y);
 
-    ctx.arc(point[0], point[1], radius, startAngle, endAngle);
-    ctx.fillStyle = parseColor(color);
-    ctx.fill();
-    ctx.closePath();
+	ctx.arc(point[0], point[1], radius, startAngle, endAngle);
+	ctx.fillStyle = parseColor(color);
+	ctx.fill();
+	ctx.closePath();
 };
 
 /**
@@ -52,13 +66,21 @@ export const semiCircle = (ctx: CanvasRenderingContext2D, x: number, y: number, 
  * @param startAngle - start angle of the arc
  * @param endAngle - end angle of the arc
  */
-export const arc = (ctx: CanvasRenderingContext2D, x: number, y: number, radius: number, color: Color, startAngle: number, endAngle: number) => {
-    ctx.beginPath();
+export const arc = (
+	ctx: CanvasRenderingContext2D,
+	x: number,
+	y: number,
+	radius: number,
+	color: Color,
+	startAngle: number,
+	endAngle: number
+) => {
+	ctx.beginPath();
 
-    const point = cartesianToCanvas(ctx, x, y);
+	const point = cartesianToCanvas(ctx, x, y);
 
-    ctx.arc(point[0], point[1], radius, startAngle, endAngle);
-    ctx.strokeStyle = parseColor(color);
-    ctx.stroke();
-    ctx.closePath();
+	ctx.arc(point[0], point[1], radius, startAngle, endAngle);
+	ctx.strokeStyle = parseColor(color);
+	ctx.stroke();
+	ctx.closePath();
 };

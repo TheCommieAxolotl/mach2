@@ -7,13 +7,14 @@ outline: deep
 Mach2 has a few different coordinate systems used internally, and sometimes you need to convert between them.
 
 ## Coordinate Systems
+
 ### DOM Coordinates
 
 The most basic coordinate system is the DOM coordinate system. This is the same as the browser's coordinate system, with the origin at the top left of the window, and the y-axis increasing downwards. DOM coordinates do not account for the position of the canvas on the page, so no matter what, (0,0) will always be the top left of the window.
 
 ### Canvas Coordinates
 
-The canvas coordinate system is the same as the DOM coordinate system, but with the origin at the top left of the *canvas*. Canvas coordinates are also impacted by a scene's resolution, so they may not correspond to the width and height of the canvas element if the scene's resolution is not exactly `1`.
+The canvas coordinate system is the same as the DOM coordinate system, but with the origin at the top left of the _canvas_. Canvas coordinates are also impacted by a scene's resolution, so they may not correspond to the width and height of the canvas element if the scene's resolution is not exactly `1`.
 
 Canvas coordinates are also impacted by a scene's zoom level, and translation. The zoom level scales the coordinates, and the translation moves the origin.
 

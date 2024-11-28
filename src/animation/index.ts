@@ -1,2 +1,2 @@
-export * from "./animatable";
-export * from "./transform";
+export * from './animatable';
+export * from './transform';

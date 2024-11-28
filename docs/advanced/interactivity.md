@@ -20,7 +20,7 @@ import mach2 from 'mach2';
 const canvas = document.getElementById('canvas');
 
 const scene = mach2.scene(canvas as HTMLCanvasElement, {
-    interactive: false
+	interactive: false
 });
 ```
 
@@ -39,17 +39,16 @@ const canvas = document.getElementById('canvas');
 
 // ---cut-before---
 const scene = mach2.scene(canvas as HTMLCanvasElement, {
-    interactive: {
-        scroll: true,
-        move: false
-    }
+	interactive: {
+		scroll: true,
+		move: false
+	}
 });
 ```
 
 <div class="canvas">
     <canvas class="mach2" id="example3"></canvas>
 </div>
-
 
 <script setup>
     import mach2 from 'mach2';

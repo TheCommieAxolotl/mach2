@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "lib": ["esnext", "dom"],
-        "strict": true,
-        "esModuleInterop": true,
-        "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "moduleResolution": "bundler",
-        "resolveJsonModule": true,
-        "paths": {
-            "~": ["./src/index.ts"],
-            "~/*": ["./src/*"],
-            "mach2": ["./src/index.ts"],
-            "mach2/*": ["./src/*"]
-        }
-    }
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"lib": ["esnext", "dom"],
+		"strict": true,
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"moduleResolution": "bundler",
+		"resolveJsonModule": true,
+		"paths": {
+			"~": ["./src/index.ts"],
+			"~/*": ["./src/*"],
+			"mach2": ["./src/index.ts"],
+			"mach2/*": ["./src/*"]
+		}
+	}
 }

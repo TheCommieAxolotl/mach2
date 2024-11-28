@@ -12,6 +12,7 @@ To create a vector in Mach2, you can use the `mach2.math.vec2` function. This fu
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // ---cut-before---
 const vec = mach2.math.vec2(2, 4);
 ```
@@ -20,13 +21,14 @@ Once you have created a vector, you can graph it using the `mach2.graph.vector` 
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // ---cut-before---
 const vec = mach2.math.vec2(2, 4);
 
 // ---cut-start---
 // @ts-ignore
 // ---cut-end---
-mach2.graph.vector(this.ctx, [0,0], vec, mach2.color.red, 4);
+mach2.graph.vector(this.ctx, [0, 0], vec, mach2.color.red, 4);
 ```
 
 <div class="canvas">
@@ -39,6 +41,7 @@ A Mach2 vector object contains a few useful methods for modifying the vector. Fo
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // ---cut-before---
 const vec1 = mach2.math.vec2(0, 5);
 const vec2 = mach2.math.vec2(-3, 0);
@@ -48,7 +51,7 @@ const result = vec1.add(vec2);
 // ---cut-start---
 // @ts-ignore
 // ---cut-end---
-mach2.graph.vector(this.ctx, [0,0], vec1, mach2.color.red, 4);
+mach2.graph.vector(this.ctx, [0, 0], vec1, mach2.color.red, 4);
 // ---cut-start---
 // @ts-ignore
 // ---cut-end---
@@ -56,7 +59,7 @@ mach2.graph.vector(this.ctx, vec1, vec2, mach2.color.blue, 4);
 // ---cut-start---
 // @ts-ignore
 // ---cut-end---
-mach2.graph.vector(this.ctx, [0,0], result, mach2.color.green, 4);
+mach2.graph.vector(this.ctx, [0, 0], result, mach2.color.green, 4);
 ```
 
 ::: tip

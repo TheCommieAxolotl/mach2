@@ -7,6 +7,7 @@ outline: deep
 A superellipse is a generalisation of an ellipse that can be used to create a wide variety of shapes. The equation for a superellipse is:
 
 <!-- |(x-k)/r_x|^d + |(y-h)/r_y|^d = 1 -->
+
 $$ \left| \frac{x-k}{r_x} \right|^d + \left| \frac{y-h}{r_y} \right|^d = 1 $$
 
 where $(k, h)$ is the center of the superellipse, $r_x$ and $r_y$ are the radii of the superellipse, and $d$ is the power that determines the shape of the superellipse. For $d = 2$, the superellipse is an ellipse. For $d = 1$, the superellipse is a rectangle. For $d = 4$, the superellipse is a squircle.
@@ -28,6 +29,7 @@ In Mach2, you can graph superellipses using the `mach2.graph.superellipse` funct
 
 ```ts
 import mach2 from 'mach2';
+
 // @ts-ignore
 // ---cut-before---
 mach2.graph.superellipse(this.ctx, 0, 0, 5, 1, mach2.colors.green, 2);

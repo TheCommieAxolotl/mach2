@@ -1,2 +1,2 @@
-export * from "./dynamic";
-export * from "./static";
+export * from './dynamic';
+export * from './static';

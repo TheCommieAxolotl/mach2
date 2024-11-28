@@ -1,69 +1,69 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 .katex {
-    font-size: inherit !important;
+	font-size: inherit !important;
 }
 
 html,
 body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #000;
-    color: #fff;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background-color: #000;
+	color: #fff;
 }
 
 body {
-    display: flex;
-    flex-direction: row;
+	display: flex;
+	flex-direction: row;
 }
 
 canvas {
-    width: 100%;
-    height: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 canvas:has(+ canvas),
 canvas + canvas {
-    width: 50%;
-    height: 100%;
+	width: 50%;
+	height: 100%;
 }
 
 .controls {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: flex;
-    gap: 0.5rem;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	display: flex;
+	gap: 0.5rem;
 
-    button {
-        padding: 0.5rem 1rem;
-        background-color: #fff;
-        color: #000;
-        border: none;
-        border-radius: 0.25rem;
-        cursor: pointer;
+	button {
+		padding: 0.5rem 1rem;
+		background-color: #fff;
+		color: #000;
+		border: none;
+		border-radius: 0.25rem;
+		cursor: pointer;
 
-        &:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
+		&:disabled {
+			opacity: 0.5;
+			cursor: not-allowed;
+		}
 
-        &:hover {
-            background-color: #000;
-            color: #fff;
-        }
-    }
+		&:hover {
+			background-color: #000;
+			color: #fff;
+		}
+	}
 
-    input {
-        padding: 0.5rem;
-        background-color: #fff;
-        color: #000;
-        border: none;
-        border-radius: 0.25rem;
-    }
+	input {
+		padding: 0.5rem;
+		background-color: #fff;
+		color: #000;
+		border: none;
+		border-radius: 0.25rem;
+	}
 }

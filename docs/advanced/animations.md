@@ -28,26 +28,27 @@ Animation primitives **must be created outside** of lifecycle methods like `upda
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 const canvas = document.getElementById('canvas');
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 // ---cut-before---
 scene.add(
-    new class extends mach2.Dynamic {
-        intercept = mach2.animation.createAnimatable<number>(0); // [!code highlight]
+	new (class extends mach2.Dynamic {
+		intercept = mach2.animation.createAnimatable<number>(0); // [!code highlight]
 
-        update() {
-            if (!this.ctx) return;
+		update() {
+			if (!this.ctx) return;
 
-            mach2.graph.axis(this.ctx);
+			mach2.graph.axis(this.ctx);
 
-            mach2.graph.linearFunction(this.ctx, 1, this.intercept(), 'white', 4);
-        }
+			mach2.graph.linearFunction(this.ctx, 1, this.intercept(), 'white', 4);
+		}
 
-        // We will discuss sequences and events later
-        sequence() {
-            this.intercept.set(6); // [!code highlight]
-        }
-    }
+		// We will discuss sequences and events later
+		sequence() {
+			this.intercept.set(6); // [!code highlight]
+		}
+	})()
 );
 ```
 
@@ -62,29 +63,30 @@ In order to smoothly transition between functions, you can use the `mach2.animat
 ```ts twoslash {3-6}
 // @errors: 2322 2695 2739
 import mach2 from 'mach2';
+
 const canvas = document.getElementById('canvas');
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 // ---cut-before---
 scene.add(
-    new class extends mach2.Dynamic {
-        graph = mach2.animation.createTransformable(
-            [(x: number) => x, mach2.color.red, 2],
-            [(x: number) => x ** 2, mach2.color.green, 4]
-        );
+	new (class extends mach2.Dynamic {
+		graph = mach2.animation.createTransformable(
+			[(x: number) => x, mach2.color.red, 2],
+			[(x: number) => x ** 2, mach2.color.green, 4]
+		);
 
-        update() {
-            if (!this.ctx) return;
+		update() {
+			if (!this.ctx) return;
 
-            mach2.graph.axis(this.ctx);
+			mach2.graph.axis(this.ctx);
 
-            this.graph.render(this.ctx); // [!code highlight]
-        }
+			this.graph.render(this.ctx); // [!code highlight]
+		}
 
-        // We will discuss sequences and events later
-        sequence() {
-            this.graph.next(); // [!code highlight]
-        }
-    }
+		// We will discuss sequences and events later
+		sequence() {
+			this.graph.next(); // [!code highlight]
+		}
+	})()
 );
 ```
 
@@ -92,12 +94,9 @@ This will create a transformable that will transition between the two functions 
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 // ---cut-before---
-[
-    (x: number) => x,
-    mach2.color.red,
-    2
-]
+[(x: number) => x, mach2.color.red, 2];
 ```
 
 ### Transformable Methods
@@ -116,25 +115,26 @@ Every time you hit the "Activation Key" (default is <kbd>Space</kbd>), the `sequ
 
 ```ts twoslash
 import mach2 from 'mach2';
+
 const canvas = document.getElementById('canvas');
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 // ---cut-before---
 scene.add(
-    new class extends mach2.Dynamic {
-        intercept = mach2.animation.createAnimatable<number>(0);
+	new (class extends mach2.Dynamic {
+		intercept = mach2.animation.createAnimatable<number>(0);
 
-        update() {
-            if (!this.ctx) return;
+		update() {
+			if (!this.ctx) return;
 
-            mach2.graph.axis(this.ctx);
+			mach2.graph.axis(this.ctx);
 
-            mach2.graph.linearFunction(this.ctx, 1, this.intercept(), 'white', 4);
-        }
+			mach2.graph.linearFunction(this.ctx, 1, this.intercept(), 'white', 4);
+		}
 
-        sequence(index: number) {
-            this.intercept.set(index + 1); // [!code highlight]
-        }
-    }
+		sequence(index: number) {
+			this.intercept.set(index + 1); // [!code highlight]
+		}
+	})()
 );
 ```
 

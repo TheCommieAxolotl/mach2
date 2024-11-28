@@ -1,59 +1,62 @@
 {
-    "name": "mach2",
-    "version": "0.0.4",
-    "description": "A speedy, lightweight, and typesafe canvas rendering and lifecycle management library.",
-    "main": "dist/mach2.cjs",
-    "module": "dist/mach2.js",
-    "types": "dist/index.d.ts",
-    "type": "module",
-    "author": "TheCommieAxolotl",
-    "packageManager": "pnpm@9.9.0",
-    "files": [
-        "dist",
-        "index.d.ts"
-    ],
-    "license": "GPL-3.0-only",
-    "homepage": "https://github.com/TheCommieAxolotl/mach2",
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/TheCommieAxolotl/mach2.git"
-    },
-    "keywords": [
-        "canvas",
-        "rendering",
-        "mach2",
-        "lightweight",
-        "math",
-        "2d",
-        "latex"
-    ],
-    "scripts": {
-        "build": "vite build",
-        "dev": "vite build --watch",
-        "demo": "vite -c demo/vite.config.ts",
-        "test": "vitest",
-        "docs:dev": "vitepress dev docs",
-        "docs:build": "vitepress build docs",
-        "docs:preview": "vitepress preview docs"
-    },
-    "devDependencies": {
-        "@rollup/plugin-terser": "^0.4.4",
-        "@shikijs/vitepress-twoslash": "^1.23.1",
-        "@types/katex": "^0.16.7",
-        "@types/node": "^22.9.3",
-        "jsdom": "^25.0.1",
-        "markdown-it-mathjax3": "^4.3.2",
-        "rollup": "^4.27.4",
-        "terser": "^5.36.0",
-        "typescript": "^5.4.2",
-        "vite": "^5.4.11",
-        "vite-plugin-dts": "^4.3.0",
-        "vite-plugin-tsconfig-paths": "^1.4.1",
-        "vitepress": "^1.5.0",
-        "vitest": "^2.1.5",
-        "vitest-canvas-mock": "^0.3.3"
-    },
-    "optionalDependencies": {
-        "katex": "^0.16.11"
-    }
+	"name": "mach2",
+	"version": "0.0.4",
+	"description": "A speedy, lightweight, and typesafe canvas rendering and lifecycle management library.",
+	"main": "dist/mach2.cjs",
+	"module": "dist/mach2.js",
+	"types": "dist/index.d.ts",
+	"type": "module",
+	"author": "TheCommieAxolotl",
+	"packageManager": "pnpm@9.9.0",
+	"files": [
+		"dist",
+		"index.d.ts"
+	],
+	"license": "GPL-3.0-only",
+	"homepage": "https://github.com/TheCommieAxolotl/mach2",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/TheCommieAxolotl/mach2.git"
+	},
+	"keywords": [
+		"canvas",
+		"rendering",
+		"mach2",
+		"lightweight",
+		"math",
+		"2d",
+		"latex"
+	],
+	"scripts": {
+		"build": "vite build",
+		"dev": "vite build --watch",
+		"demo": "vite -c demo/vite.config.ts",
+		"test": "vitest",
+		"docs:dev": "vitepress dev docs",
+		"docs:build": "vitepress build docs",
+		"docs:preview": "vitepress preview docs",
+		"format": "prettier --write ."
+	},
+	"devDependencies": {
+		"@rollup/plugin-terser": "^0.4.4",
+		"@shikijs/vitepress-twoslash": "^1.23.1",
+		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
+		"@types/katex": "^0.16.7",
+		"@types/node": "^22.9.3",
+		"jsdom": "^25.0.1",
+		"markdown-it-mathjax3": "^4.3.2",
+		"prettier": "^3.4.1",
+		"rollup": "^4.27.4",
+		"terser": "^5.36.0",
+		"typescript": "^5.4.2",
+		"vite": "^5.4.11",
+		"vite-plugin-dts": "^4.3.0",
+		"vite-plugin-tsconfig-paths": "^1.4.1",
+		"vitepress": "^1.5.0",
+		"vitest": "^2.1.5",
+		"vitest-canvas-mock": "^0.3.3"
+	},
+	"optionalDependencies": {
+		"katex": "^0.16.11"
+	}
 }

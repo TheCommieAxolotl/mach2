@@ -1,14 +1,14 @@
-export * from "./lerp";
-export * from "./conversion";
-export * from "./points";
-export * from "./map";
-export * from "./angles";
-export * from "./vector";
+export * from './lerp';
+export * from './conversion';
+export * from './points';
+export * from './map';
+export * from './angles';
+export * from './vector';
 
 export const holdsValue = (value: number | undefined | null) => {
-    if (value === undefined || value === null || !isFinite(value) || isNaN(value)) {
-        return false;
-    }
+	if (value === undefined || value === null || !isFinite(value) || isNaN(value)) {
+		return false;
+	}
 
-    return true;
+	return true;
 };

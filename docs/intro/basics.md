@@ -36,19 +36,20 @@ To create a dynamic object, all you need to do is extend the `mach2.Dynamic` cla
 
 ```ts twoslash {2-10}
 import mach2 from 'mach2';
+
 const canvas = document.getElementById('canvas');
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 // ---cut-before---
 scene.add(
-    new class extends mach2.Dynamic {
-        update() {
-            if (!this.ctx) return;
+	new (class extends mach2.Dynamic {
+		update() {
+			if (!this.ctx) return;
 
-            mach2.graph.axis(this.ctx);
+			mach2.graph.axis(this.ctx);
 
-            mach2.graph.linearFunction(this.ctx, this.frame / 100, 0, 'white', 4);
-        }
-    }
+			mach2.graph.linearFunction(this.ctx, this.frame / 100, 0, 'white', 4);
+		}
+	})()
 );
 ```
 
@@ -62,19 +63,20 @@ You can also create static objects by extending the `mach2.Static` class. These 
 
 ```ts twoslash {2-10}
 import mach2 from 'mach2';
+
 const canvas = document.getElementById('canvas');
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 // ---cut-before---
 scene.add(
-    new class extends mach2.Static {
-        mount() {
-            if (!this.ctx) return;
+	new (class extends mach2.Static {
+		mount() {
+			if (!this.ctx) return;
 
-            mach2.graph.axis(this.ctx);
+			mach2.graph.axis(this.ctx);
 
-            mach2.graph.linearFunction(this.ctx, 1, 0, 'white', 4);
-        }
-    }
+			mach2.graph.linearFunction(this.ctx, 1, 0, 'white', 4);
+		}
+	})()
 );
 ```
 
@@ -85,7 +87,6 @@ scene.add(
 ## Next Steps
 
 Now that you've learned the basics of Mach2, you can move on to more advanced topics like [functions](/graphing/functions), [animations](/advanced/animations), and [interactivity](/advanced/interactivity).
-
 
 <script setup>
     import mach2 from 'mach2';
