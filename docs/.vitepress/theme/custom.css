@@ -20,3 +20,12 @@
         border: 1px solid var(--vp-c-border);
     }
 }
+
+kbd {
+    background-color: var(--vp-badge-info-bg);
+    border-radius: 4px;
+    padding: 0.1em 0.3em;
+    font-size: 0.9em;
+    color: var(--vp-badge-info-text);
+    border: 1px solid var(--vp-badge-info-border);
+}

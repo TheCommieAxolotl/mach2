@@ -87,3 +87,102 @@ scene.add(
     }
 );
 ```
+
+This will create a transformable that will transition between the two functions passed in. The first element of the tuple is the function to transition to, the second is the `ObjectColor` to transition to and the third is the line weight of the function.
+
+```ts twoslash
+import mach2 from 'mach2';
+// ---cut-before---
+[
+    (x: number) => x,
+    mach2.color.red,
+    2
+]
+```
+
+### Transformable Methods
+
+- `.next()` - Transitions to the next function in the list
+- `.prev()` - Transitions to the previous function in the list
+- `.swapTo(index: number)` - Transitions to the function at the index passed in
+- `get color(): ObjectColor` - Returns the current color of the transformable
+- `get weights(): number[]` - Returns the current weight of the transformable
+
+## Sequences
+
+Mach2 offers a built-in system to build complex visualisations that need to either transition between multiple states or respond to user input. This is done through the `sequence` method on a `Dynamic` object.
+
+Every time you hit the "Activation Key" (default is <kbd>Space</kbd>), the `sequence` method will be called with the index of the sequence to run.
+
+```ts twoslash
+import mach2 from 'mach2';
+const canvas = document.getElementById('canvas');
+const scene = mach2.scene(canvas as HTMLCanvasElement);
+// ---cut-before---
+scene.add(
+    new class extends mach2.Dynamic {
+        intercept = mach2.animation.createAnimatable<number>(0);
+
+        update() {
+            if (!this.ctx) return;
+
+            mach2.graph.axis(this.ctx);
+
+            mach2.graph.linearFunction(this.ctx, 1, this.intercept(), 'white', 4);
+        }
+
+        sequence(index: number) {
+            this.intercept.set(index + 1); // [!code highlight]
+        }
+    }
+);
+```
+
+Try it out by pressing <kbd>Space</kbd>:
+
+<div class="canvas">
+    <canvas class="mach2" id="example1"></canvas>
+</div>
+
+<script setup>
+    import mach2 from 'mach2';
+    import { onMounted } from 'vue'
+
+    onMounted(() => {
+        const darkmode = document.querySelector('html').classList.contains('dark');
+
+        const bg = darkmode ? mach2.color.black : mach2.color.white;
+        const foreground = darkmode ? mach2.color.white : mach2.color.black;
+
+        // vue will await this script, so we need to async load the canvas
+        setTimeout(() => {
+            const canvas = document.getElementById('example1');
+
+            if (canvas) {
+                const scene = mach2.scene(canvas, {
+                    background: bg
+                });
+
+                scene.add(
+                    new class extends mach2.Dynamic {
+                        intercept = mach2.animation.createAnimatable(0);
+
+                        update() {
+                            if (!this.ctx) return;
+
+                            mach2.graph.axis(this.ctx);
+
+                            mach2.graph.linearFunction(this.ctx, 1, this.intercept(), foreground, 4);
+                        }
+
+                        sequence(index) {
+                            this.intercept.set(index + 1);
+                        }
+                    }
+                );
+
+                scene.start();
+            }
+        })
+    })
+</script>
