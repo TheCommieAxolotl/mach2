@@ -59,24 +59,25 @@ There is also `.setImmediate()` which will set the value immediately without any
 
 In order to smoothly transition between functions, you can use the `mach2.animation.createTransformable` utility:
 
-```ts twoslash {7-10}
+```ts twoslash {3-6}
+// @errors: 2322 2695 2739
 import mach2 from 'mach2';
 const canvas = document.getElementById('canvas');
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 // ---cut-before---
 scene.add(
     new class extends mach2.Dynamic {
-        graph = mach2.animation.createTransformable([
-            [(x: number) => x, 0, mach2.color.red, 2],
+        graph = mach2.animation.createTransformable(
+            [(x: number) => x, mach2.color.red, 2],
             [(x: number) => x ** 2, mach2.color.green, 4]
-        ]);
+        );
 
         update() {
             if (!this.ctx) return;
 
             mach2.graph.axis(this.ctx);
 
-            this.graph.render(this.ctx)
+            this.graph.render(this.ctx); // [!code highlight]
         }
 
         // We will discuss sequences and events later
