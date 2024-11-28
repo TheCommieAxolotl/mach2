@@ -27,7 +27,7 @@ const allLatex = await mach2.latex.createLatexRenderingContext(scene.ctx, "f(x) 
 
 scene.add(
     new (class extends mach2.Dynamic {
-        waves = waves.map((wave, i) => mach2.animation.createTranformable([added, mach2.color.objectOpacity(mach2.color.white, 0.5), 2], [(x: number) => wave(x) + i * 4, colors[i], 2]));
+        waves = waves.map((wave, i) => mach2.animation.createTransformable([added, mach2.color.objectOpacity(mach2.color.white, 0.5), 2], [(x: number) => wave(x) + i * 4, colors[i], 2]));
         opacities = mach2.animation.createAnimatable({
             all: 1,
             each: 0,

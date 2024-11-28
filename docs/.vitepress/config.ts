@@ -45,6 +45,13 @@ export default defineConfig({
                     { text: "Superellipses", link: "/graphing/superellipses" },
                 ],
             },
+            {
+                text: "Advanced",
+                items: [
+                    { text: "Interactivity", link: "/advanced/interactivity" },
+                    { text: "Animations", link: "/advanced/animations" },
+                ],
+            },
         ],
         socialLinks: [{ icon: "github", link: "https://github.com/TheCommieAxolotl/mach2" }],
     },
