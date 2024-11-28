@@ -53,9 +53,11 @@ The `mach2.graph.polynomialFromPoints` function takes a list of points, and grap
 ```ts twoslash
 import mach2 from 'mach2';
 
-// @ts-ignore
 // --cut-before--
 mach2.graph.polynomialFromPoints(
+// ---cut-start---
+// @ts-ignore
+// ---cut-end---
 	this.ctx,
 	[
 		[0, 1],
