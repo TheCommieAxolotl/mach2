@@ -105,10 +105,17 @@ export const createTransformable = (...functions: Transformable[]) => {
         return swapTo(nextIndex);
     };
 
+    const prev = () => {
+        const nextIndex = (targetIndex - 1 + len) % len;
+
+        return swapTo(nextIndex);
+    };
+
     return {
         render,
         swapTo,
         next,
+        prev,
         get weights() {
             return functionWeighting.map((weight) => weight());
         },
