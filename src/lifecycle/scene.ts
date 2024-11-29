@@ -29,7 +29,9 @@ export const getSceneId = (canvas: HTMLCanvasElement) => {
 	const id = canvas.dataset.scene;
 
 	if (id === undefined) {
-		throw new Error('Scene ID not found');
+		console.error('Scene ID not found, returning 0');
+
+		return 0;
 	}
 
 	return Number(id);

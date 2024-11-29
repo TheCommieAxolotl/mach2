@@ -62,6 +62,7 @@ export const getVisibleBounds = (
 	scene: number
 ): [number, number, number, number] => {
 	translates[scene] ??= [0, 0];
+	scales[scene] ??= defaultScale;
 
 	const centerX = ctx.canvas.width / 2 + (translates[scene][0] || 0);
 	const centerY = ctx.canvas.height / 2 + (translates[scene][1] || 0);
@@ -101,6 +102,7 @@ export const cartesianToCanvas = <X extends number | undefined, Y extends number
 	if (x === undefined || y === undefined) return undefined as any;
 
 	translates[scene] ??= [0, 0];
+	scales[scene] ??= defaultScale;
 
 	const centerX = ctx.canvas.width / 2 + translates[scene][0];
 	const centerY = ctx.canvas.height / 2 + translates[scene][1];
@@ -122,6 +124,7 @@ export const canvasToCartesian = <X extends number | undefined, Y extends number
 	if (x === undefined || y === undefined) return undefined as any;
 
 	translates[scene] ??= [0, 0];
+	scales[scene] ??= defaultScale;
 
 	const centerX = ctx.canvas.width / 2 + (translates[scene][0] || 0);
 	const centerY = ctx.canvas.height / 2 + (translates[scene][1] || 0);
