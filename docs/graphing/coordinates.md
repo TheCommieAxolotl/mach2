@@ -36,8 +36,14 @@ Polar coordinates are currently only accepted by the `mach2.grah.polar` function
 
 To convert between coordinate systems, you can use the following functions:
 
-- `mach2.math.cartesianToCanvas(ctx, x, y)`: Converts Cartesian coordinates to canvas coordinates.
-- `mach2.math.canvasToCartesian(ctx, x, y)`: Converts canvas coordinates to Cartesian coordinates.
-- `mach2.math.domToCartesian(ctx, x, y)`: Converts canvas coordinates to Cartesian coordinates.
+- `mach2.math.cartesianToCanvas(ctx, x, y, sceneId)`: Converts Cartesian coordinates to canvas coordinates.
+- `mach2.math.canvasToCartesian(ctx, x, y, sceneId)`: Converts canvas coordinates to Cartesian coordinates.
+- `mach2.math.domToCartesian(ctx, x, y, sceneId)`: Converts canvas coordinates to Cartesian coordinates.
 - `mach2.math.polarToCartesian(r, theta)`: Converts polar coordinates to Cartesian coordinates.
 - `mach2.math.cartesianToPolar(x, y)`: Converts Cartesian coordinates to polar coordinates.
+
+:::tip
+
+Notice how some methods require a `sceneId` parameter? This is because the conversion functions need to know the resolution and zoom level of the scene to convert between coordinate systems.
+
+Instead of passing in a `sceneId`, you can instead use each scene's `.c2p`, `.p2c`, and `d2c` methods to convert between coordinate systems. These methods are bound to the scene, and do not require a `sceneId` parameter.

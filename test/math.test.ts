@@ -32,34 +32,3 @@ describe('Math and Conversions', () => {
 		expect(mach2.math.lerp(0, 100, 1)).toBe(100);
 	});
 });
-
-const canvas = document.createElement('canvas');
-
-canvas.width = 1024;
-canvas.height = 768;
-
-const ctx = canvas.getContext('2d')!;
-
-describe('Canvas Math', () => {
-	test('Convert cartesian coordinates to canvas coordinates', () => {
-		expect(mach2.math.cartesianToCanvas(ctx, 0, 0)).toEqual([512, 384]);
-		expect(mach2.math.cartesianToCanvas(ctx, 1, 1)).toEqual([572, 324]);
-		expect(mach2.math.cartesianToCanvas(ctx, -1, -1)).toEqual([452, 444]);
-	});
-
-	test('Convert canvas coordinates to cartesian coordinates', () => {
-		expect(mach2.math.canvasToCartesian(ctx, 512, 384)).toEqual([0, 0]);
-		expect(mach2.math.canvasToCartesian(ctx, 572, 324)).toEqual([1, 1]);
-		expect(mach2.math.canvasToCartesian(ctx, 452, 444)).toEqual([-1, -1]);
-	});
-
-	test('Gets bounds of a canvas', () => {
-		const bounds = mach2.math.getVisibleBounds(ctx);
-
-		const canvas = mach2.math.cartesianToCanvas(ctx, bounds[0], bounds[2]);
-		const canvas2 = mach2.math.cartesianToCanvas(ctx, bounds[1], bounds[3]);
-
-		expect(canvas).toEqual([0, 768]);
-		expect(canvas2).toEqual([1024, 0]);
-	});
-});

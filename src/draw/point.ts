@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
 
@@ -17,8 +18,12 @@ export const point = (
 	color: Color,
 	weight = 1
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
-	const p = cartesianToCanvas(ctx, x, y);
+
+	const p = cartesianToCanvas(ctx, x, y, scene);
+
 	ctx.arc(p[0], p[1], weight, 0, 2 * Math.PI);
 	ctx.fillStyle = parseColor(color);
 	ctx.fill();

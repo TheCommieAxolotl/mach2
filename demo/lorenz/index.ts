@@ -3,7 +3,7 @@ import mach2 from 'mach2';
 
 const scene = mach2.scene(document.querySelector('canvas') as HTMLCanvasElement);
 
-mach2.math.setImmediateScale(30);
+mach2.math.setImmediateScale(30, scene.id);
 
 const sigma = 10;
 const rho = 28;
@@ -69,9 +69,9 @@ scene.add(
 				throw new Error('CanvasRenderingContext2D is null');
 			}
 
-			const latexPoint1 = mach2.math.domToCartesian(this.ctx, 20, window.innerHeight - 20);
-			const latexPoint2 = mach2.math.domToCartesian(this.ctx, 20, window.innerHeight - 70);
-			const latexPoint3 = mach2.math.domToCartesian(this.ctx, 20, window.innerHeight - 120);
+			const latexPoint1 = scene.d2c(20, window.innerHeight - 20);
+			const latexPoint2 = scene.d2c(20, window.innerHeight - 70);
+			const latexPoint3 = scene.d2c(20, window.innerHeight - 120);
 
 			diff1.render(...latexPoint1, 'white', 'right', 'top');
 			diff2.render(...latexPoint2, 'white', 'right', 'top');

@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas, lerp } from '~/math';
 import { Color, HorizontalPosition, VerticalPosition } from '~/shared';
 
@@ -17,6 +18,8 @@ let i = 0;
  * ltx.render(0, 0, "white");
  */
 export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D, latex: string) => {
+	const scene = getSceneId(ctx.canvas);
+
 	if (!katex) {
 		katex = (await import('katex')).default;
 	}
@@ -58,7 +61,7 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
 			alignY: VerticalPosition = 'center',
 			size: string | number = '1em'
 		) => {
-			const p = cartesianToCanvas(ctx, x, y);
+			const p = cartesianToCanvas(ctx, x, y, scene);
 
 			if (p === undefined) return () => {};
 

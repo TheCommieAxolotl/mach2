@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
 
@@ -17,9 +18,11 @@ export const circle = (
 	radius: number,
 	color: Color
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
 
-	const point = cartesianToCanvas(ctx, x, y);
+	const point = cartesianToCanvas(ctx, x, y, scene);
 
 	ctx.arc(point[0], point[1], radius, 0, 2 * Math.PI);
 	ctx.fillStyle = parseColor(color);
@@ -46,9 +49,11 @@ export const semiCircle = (
 	startAngle: number,
 	endAngle: number
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
 
-	const point = cartesianToCanvas(ctx, x, y);
+	const point = cartesianToCanvas(ctx, x, y, scene);
 
 	ctx.arc(point[0], point[1], radius, startAngle, endAngle);
 	ctx.fillStyle = parseColor(color);
@@ -75,9 +80,11 @@ export const arc = (
 	startAngle: number,
 	endAngle: number
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
 
-	const point = cartesianToCanvas(ctx, x, y);
+	const point = cartesianToCanvas(ctx, x, y, scene);
 
 	ctx.arc(point[0], point[1], radius, startAngle, endAngle);
 	ctx.strokeStyle = parseColor(color);

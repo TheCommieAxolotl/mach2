@@ -30,7 +30,7 @@ scene.add(
 			this.x = mach2.math.lerp(this.x, pointerX, 0.1 * desiredFps * ms2s(this.deltaTime));
 			this.y = mach2.math.lerp(this.y, pointerY, 0.1 * desiredFps * ms2s(this.deltaTime));
 
-			const coords = mach2.math.domToCartesian(this.ctx, this.x, this.y);
+			const coords = scene.d2c(this.x, this.y);
 
 			mach2.draw.circle(
 				this.ctx,

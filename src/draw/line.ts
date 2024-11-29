@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
 
@@ -18,9 +19,11 @@ export const line = (
 	color: Color,
 	weight = 1
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
-	const p1 = cartesianToCanvas(ctx, x1, y1);
-	const p2 = cartesianToCanvas(ctx, x2, y2);
+	const p1 = cartesianToCanvas(ctx, x1, y1, scene);
+	const p2 = cartesianToCanvas(ctx, x2, y2, scene);
 
 	ctx.moveTo(p1[0], p1[1]);
 	ctx.lineTo(p2[0], p2[1]);
@@ -59,11 +62,13 @@ export const curve = (
 	color: Color,
 	weight = 1
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
 
-	const p1 = cartesianToCanvas(ctx, x1, y1);
-	const p2 = cartesianToCanvas(ctx, x2, y2);
-	const p3 = cartesianToCanvas(ctx, x3, y3);
+	const p1 = cartesianToCanvas(ctx, x1, y1, scene);
+	const p2 = cartesianToCanvas(ctx, x2, y2, scene);
+	const p3 = cartesianToCanvas(ctx, x3, y3, scene);
 
 	ctx.moveTo(p1[0], p1[1]);
 	ctx.quadraticCurveTo(p2[0], p2[1], p3[0], p3[1]);

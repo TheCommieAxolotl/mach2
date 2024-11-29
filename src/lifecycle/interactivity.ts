@@ -1,9 +1,14 @@
 import { getTargetScale, pan, setScale } from '~/math';
 
-export const registerEvents = (cavnas: HTMLCanvasElement, scroll: boolean, move: boolean) => {
+export const registerEvents = (
+	cavnas: HTMLCanvasElement,
+	scroll: boolean,
+	move: boolean,
+	scene: number
+) => {
 	if (scroll)
 		cavnas.addEventListener('wheel', (e) => {
-			let targetScale = getTargetScale();
+			let targetScale = getTargetScale(scene);
 
 			if (e.deltaY > 0) {
 				targetScale -= 1;
@@ -19,7 +24,7 @@ export const registerEvents = (cavnas: HTMLCanvasElement, scroll: boolean, move:
 				targetScale = 1;
 			}
 
-			setScale(targetScale);
+			setScale(targetScale, scene);
 
 			e.preventDefault();
 		});
@@ -43,7 +48,7 @@ export const registerEvents = (cavnas: HTMLCanvasElement, scroll: boolean, move:
 
 		window.addEventListener('mousemove', (e) => {
 			if (isPanning) {
-				pan(e.clientX - initialMousePosition.x, e.clientY - initialMousePosition.y);
+				pan(e.clientX - initialMousePosition.x, e.clientY - initialMousePosition.y, scene);
 				initialMousePosition = { x: e.clientX, y: e.clientY };
 			}
 		});

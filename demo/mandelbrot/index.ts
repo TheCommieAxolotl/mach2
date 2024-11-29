@@ -14,12 +14,12 @@ scene.add(
 
 			mach2.graph.axis(this.ctx, 0.4);
 
-			const bounds = mach2.math.getVisibleBounds(this.ctx);
+			const bounds = mach2.math.getVisibleBounds(this.ctx, scene.id);
 
 			const maxIterations = 30;
 
-			const scale = mach2.math.getScale();
-			const translate = mach2.math.getTranslation();
+			const scale = mach2.math.getScale(scene.id);
+			const translate = mach2.math.getTranslation(scene.id);
 
 			const centerX = this.ctx.canvas.width / 2 + translate[0];
 			const centerY = this.ctx.canvas.height / 2 + translate[1];
@@ -78,9 +78,9 @@ scene.add(
 
 window.addEventListener('keydown', (e) => {
 	if (e.key === 'ArrowUp') {
-		scene.zoom(mach2.math.getScale() * 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) * 1.5);
 	} else if (e.key === 'ArrowDown') {
-		scene.zoom(mach2.math.getScale() / 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) / 1.5);
 	}
 });
 

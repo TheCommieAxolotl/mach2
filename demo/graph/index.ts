@@ -5,7 +5,7 @@ const scene = mach2.scene(document.querySelector('canvas#scene') as HTMLCanvasEl
 	debug: true
 });
 
-mach2.math.setImmediateScale(122);
+mach2.math.setImmediateScale(122, scene.id);
 
 const latex = await mach2.latex.createLatexRenderingContext(
 	scene.ctx,
@@ -133,9 +133,9 @@ scene.add(
 
 window.addEventListener('keydown', (e) => {
 	if (e.key === 'ArrowUp') {
-		scene.zoom(mach2.math.getScale() * 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) * 1.5);
 	} else if (e.key === 'ArrowDown') {
-		scene.zoom(mach2.math.getScale() / 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) / 1.5);
 	}
 });
 

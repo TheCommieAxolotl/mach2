@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { canvasToCartesian, cartesianToCanvas, getVisibleBounds, holdsValue } from '~/math';
 import { Color } from '~/shared';
 
@@ -17,26 +18,28 @@ export const fn = (
 	color: Color,
 	weight = 1
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.strokeStyle = parseColor(color);
 
 	ctx.beginPath();
 
-	const bounds = getVisibleBounds(ctx);
+	const bounds = getVisibleBounds(ctx, scene);
 
 	try {
-		const start = cartesianToCanvas(ctx, bounds[0], fn(bounds[0]));
-		const end = cartesianToCanvas(ctx, bounds[1], fn(bounds[1]));
+		const start = cartesianToCanvas(ctx, bounds[0], fn(bounds[0]), scene);
+		const end = cartesianToCanvas(ctx, bounds[1], fn(bounds[1]), scene);
 
 		ctx.moveTo(start[0], start[1]);
 
 		for (let x = start[0]; x < end[0]; x++) {
-			const point = canvasToCartesian(ctx, x, 0);
-			const last = canvasToCartesian(ctx, x - 1, 0);
+			const point = canvasToCartesian(ctx, x, 0, scene);
+			const last = canvasToCartesian(ctx, x - 1, 0, scene);
 
 			const y = fn(point[0]);
 			const lastY = fn(last[0]);
 
-			const coords = cartesianToCanvas(ctx, point[0], y);
+			const coords = cartesianToCanvas(ctx, point[0], y, scene);
 
 			if (
 				!holdsValue(lastY) ||

@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import type { Vector2 } from '~/math';
 import { type Point, cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
@@ -19,10 +20,12 @@ export const vector = (
 	color: Color,
 	weight = 1
 ) => {
-	const end = cartesianToCanvas(ctx, origin[0] + vector.x, origin[1] + vector.y);
+	const scene = getSceneId(ctx.canvas);
+
+	const end = cartesianToCanvas(ctx, origin[0] + vector.x, origin[1] + vector.y, scene);
 
 	ctx.beginPath();
-	ctx.moveTo(...cartesianToCanvas(ctx, ...origin));
+	ctx.moveTo(...cartesianToCanvas(ctx, ...origin, scene));
 	ctx.lineTo(...end);
 	ctx.strokeStyle = parseColor(color);
 	ctx.lineWidth = weight;

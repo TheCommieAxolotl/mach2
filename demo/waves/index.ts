@@ -5,8 +5,8 @@ const scene = mach2.scene(document.querySelector('canvas#scene') as HTMLCanvasEl
 	debug: true
 });
 
-mach2.math.setImmediateScale(100);
-mach2.math.setPan(0, 500);
+mach2.math.setImmediateScale(100, scene.id);
+mach2.math.setPan(0, 50, scene.id);
 
 const colors = [
 	mach2.color.lightBlue,
@@ -61,7 +61,7 @@ scene.add(
 				throw new Error('CanvasRenderingContext2D is null');
 			}
 
-			const latexPoint = mach2.math.domToCartesian(this.ctx, 20, window.innerHeight - 20);
+			const latexPoint = scene.d2c(20, window.innerHeight - 20);
 
 			allLatex.render(
 				...latexPoint,
@@ -97,9 +97,9 @@ scene.add(
 
 window.addEventListener('keydown', (e) => {
 	if (e.key === 'ArrowUp') {
-		scene.zoom(mach2.math.getScale() * 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) * 1.5);
 	} else if (e.key === 'ArrowDown') {
-		scene.zoom(mach2.math.getScale() / 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) / 1.5);
 	}
 });
 

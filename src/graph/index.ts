@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
 
@@ -15,11 +16,13 @@ export * from './vector';
  * Render a Cartesian axis on the canvas.
  */
 export const axis = (ctx: CanvasRenderingContext2D, opacity = 1, color?: Color) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.strokeStyle = parseColor(color) || `rgb(${80 * opacity}, ${80 * opacity}, ${80 * opacity})`;
 
 	ctx.beginPath();
 
-	const center = cartesianToCanvas(ctx, 0, 0);
+	const center = cartesianToCanvas(ctx, 0, 0, scene);
 
 	ctx.moveTo(0, center[1]);
 	ctx.lineTo(ctx.canvas.width, center[1]);
@@ -27,7 +30,8 @@ export const axis = (ctx: CanvasRenderingContext2D, opacity = 1, color?: Color) 
 	ctx.moveTo(center[0], 0);
 	ctx.lineTo(center[0], ctx.canvas.height);
 
-	const interval = cartesianToCanvas(ctx, 1, 0)[0] - cartesianToCanvas(ctx, 0, 0)[0];
+	const interval =
+		cartesianToCanvas(ctx, 1, 0, scene)[0] - cartesianToCanvas(ctx, 0, 0, scene)[0];
 
 	for (let i = center[0]; i < ctx.canvas.width; i += interval) {
 		ctx.moveTo(i, center[1] - 5);

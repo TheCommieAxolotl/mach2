@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
 
@@ -18,6 +19,8 @@ export const superellipse = (
 	bounds = 2 * Math.PI,
 	precision = 0.01
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	ctx.beginPath();
 
 	ctx.strokeStyle = parseColor(color);
@@ -32,7 +35,7 @@ export const superellipse = (
 	}
 
 	for (let i = 0; i < points.length; i++) {
-		const [x, y] = cartesianToCanvas(ctx, points[i][0], points[i][1]);
+		const [x, y] = cartesianToCanvas(ctx, points[i][0], points[i][1], scene);
 
 		if (i === 0) {
 			ctx.moveTo(x, y);

@@ -41,9 +41,9 @@ scene.add(
 
 window.addEventListener('keydown', (e) => {
 	if (e.key === 'ArrowUp') {
-		scene.zoom(mach2.math.getScale() * 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) * 1.5);
 	} else if (e.key === 'ArrowDown') {
-		scene.zoom(mach2.math.getScale() / 1.5);
+		scene.zoom(mach2.math.getScale(scene.id) / 1.5);
 	}
 });
 

@@ -28,11 +28,7 @@ const runSimulation = (atomCount = 1000, probability = 0.01) => {
 
 			if (this.decayed) return;
 
-			const p = mach2.math.canvasToCartesian(
-				this.ctx,
-				this.x * this.ctx.canvas.width,
-				this.y * this.ctx.canvas.height
-			);
+			const p = scene.p2c(this.x * this.ctx.canvas.width, this.y * this.ctx.canvas.height);
 
 			mach2.draw.circle(
 				this.ctx,
@@ -119,7 +115,7 @@ const runSimulation = (atomCount = 1000, probability = 0.01) => {
 							probability / Number(this.ctx?.canvas.dataset.resolution || '1')
 						);
 
-						return mach2.math.canvasToCartesian(this.ctx!, 0, prevY)[1];
+						return scene.p2c(0, prevY)[1];
 					},
 					'red',
 					2

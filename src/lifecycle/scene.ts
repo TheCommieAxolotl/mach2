@@ -1,5 +1,11 @@
 import { parseColor } from '~/color';
-import { cartesianToCanvas, domToCartesian, setImmediateScale, setScale } from '~/math';
+import {
+	canvasToCartesian,
+	cartesianToCanvas,
+	domToCartesian,
+	setImmediateScale,
+	setScale
+} from '~/math';
 import { Dynamic, Static } from '~/object';
 import { SceneObject } from '~/object/object';
 import { Color } from '~/shared';
@@ -19,10 +25,26 @@ export type SceneOptions = {
 		  };
 };
 
+export const getSceneId = (canvas: HTMLCanvasElement) => {
+	const id = canvas.dataset.scene;
+
+	if (id === undefined) {
+		throw new Error('Scene ID not found');
+	}
+
+	return Number(id);
+};
+
+let sceneId = 0;
+
 /**
  * Creates a scene.
  */
 export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> = {}): Scene => {
+	const SCENE_ID = sceneId++;
+
+	canvas.dataset.scene = SCENE_ID.toString();
+
 	const settings: SceneOptions = {
 		debug: false,
 		resolution: 2,
@@ -32,7 +54,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 		...options
 	};
 
-	setImmediateScale(settings.zoom);
+	setImmediateScale(settings.zoom, SCENE_ID);
 
 	if (settings.debug) {
 		console.log('Creating scene with canvas', canvas);
@@ -118,7 +140,8 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 		then = now;
 
 		cartesianUnit =
-			(cartesianToCanvas(ctx, 1, 0)[0] - cartesianToCanvas(ctx, 0, 0)[0]) /
+			(cartesianToCanvas(ctx, 1, 0, SCENE_ID)[0] -
+				cartesianToCanvas(ctx, 0, 0, SCENE_ID)[0]) /
 			settings.resolution;
 
 		requestAnimationFrame(loop);
@@ -132,7 +155,8 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 		canvas.dataset.resolution = settings.resolution.toString();
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
 		cartesianUnit =
-			(cartesianToCanvas(ctx, 1, 0)[0] - cartesianToCanvas(ctx, 0, 0)[0]) /
+			(cartesianToCanvas(ctx, 1, 0, SCENE_ID)[0] -
+				cartesianToCanvas(ctx, 0, 0, SCENE_ID)[0]) /
 			settings.resolution;
 
 		for (const object of objects) {
@@ -156,7 +180,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 			typeof settings.interactive === 'boolean' ?
 				{ scroll: true, move: true }
 			:	settings.interactive;
-		registerEvents(canvas, scroll, move);
+		registerEvents(canvas, scroll, move, SCENE_ID);
 	}
 
 	const stop = () => {
@@ -178,7 +202,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 	};
 
 	const click = (e: MouseEvent) => {
-		const cartesian = domToCartesian(ctx, e.clientX, e.clientY);
+		const cartesian = domToCartesian(ctx, e.clientX, e.clientY, SCENE_ID);
 
 		for (const cb of cbs.click) {
 			cb(
@@ -202,6 +226,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 
 	const ret: Scene = {
 		options: settings,
+		id: SCENE_ID,
 		add,
 		start,
 		stop,
@@ -209,13 +234,16 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 		destroy,
 		ctx,
 		zoom: (target: number) => {
-			setScale(target);
+			setScale(target, SCENE_ID);
 		},
 		on: {
 			click: (cb) => {
 				cbs.click.push(cb as unknown as Parameters<Scene['on'][keyof Scene['on']]>[0]);
 			}
-		}
+		},
+		c2p: (x: number, y: number) => cartesianToCanvas(ctx, x, y, SCENE_ID),
+		p2c: (x: number, y: number) => canvasToCartesian(ctx, x, y, SCENE_ID),
+		d2c: (x: number, y: number) => domToCartesian(ctx, x, y, SCENE_ID)
 	};
 
 	return ret;
@@ -229,6 +257,10 @@ export type Scene = {
 
 	zoom: (target: number) => void;
 
+	c2p: (x: number, y: number) => [number, number];
+	p2c: (x: number, y: number) => [number, number];
+	d2c: (x: number, y: number) => [number, number];
+
 	on: {
 		click: (
 			fn: (
@@ -239,6 +271,7 @@ export type Scene = {
 		) => void;
 	};
 
+	id: number;
 	options: SceneOptions;
 	canvas: HTMLCanvasElement;
 	ctx: CanvasRenderingContext2D;

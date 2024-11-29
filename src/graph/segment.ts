@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { Point, cartesianToCanvas } from '~/math';
 import { Color } from '~/shared';
 
@@ -16,17 +17,19 @@ export const segment = (
 	color: Color,
 	weight = 1
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	if (!points.length) {
 		return;
 	}
 
-	const initial = cartesianToCanvas(ctx, ...points[0]);
+	const initial = cartesianToCanvas(ctx, ...points[0], scene);
 
 	ctx.beginPath();
 	ctx.moveTo(initial[0], initial[1]);
 
 	for (let i = 1; i < points.length; i++) {
-		const [x, y] = cartesianToCanvas(ctx, ...points[i]);
+		const [x, y] = cartesianToCanvas(ctx, ...points[i], scene);
 		ctx.lineTo(x, y);
 	}
 
@@ -49,29 +52,31 @@ export const curveSegment = (
 	color: Color,
 	weight = 1
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	if (!points.length) {
 		return;
 	}
 
-	const initial = cartesianToCanvas(ctx, ...points[0]);
+	const initial = cartesianToCanvas(ctx, ...points[0], scene);
 
 	ctx.beginPath();
 	ctx.moveTo(...initial);
 
 	for (let i = 1; i < points.length - 2; i++) {
-		const cp1 = cartesianToCanvas(ctx, ...points[i]);
-		const cp2 = cartesianToCanvas(ctx, ...points[i + 1]);
-		const end = cartesianToCanvas(ctx, ...points[i + 2]);
+		const cp1 = cartesianToCanvas(ctx, ...points[i], scene);
+		const cp2 = cartesianToCanvas(ctx, ...points[i + 1], scene);
+		const end = cartesianToCanvas(ctx, ...points[i + 2], scene);
 
 		ctx.bezierCurveTo(...cp1, ...cp2, ...end);
 	}
 
 	if (points.length > 2) {
-		const lastControlPoint = cartesianToCanvas(ctx, ...points[points.length - 2]);
-		const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1]);
+		const lastControlPoint = cartesianToCanvas(ctx, ...points[points.length - 2], scene);
+		const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1], scene);
 		ctx.quadraticCurveTo(...lastControlPoint, ...lastPoint);
 	} else {
-		const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1]);
+		const lastPoint = cartesianToCanvas(ctx, ...points[points.length - 1], scene);
 		ctx.lineTo(...lastPoint);
 	}
 

@@ -1,5 +1,6 @@
 import { parseColor } from '~/color';
 import { LatexRenderingContext } from '~/latex';
+import { getSceneId } from '~/lifecycle';
 import { canvasToCartesian, cartesianToCanvas, lerp } from '~/math';
 import { Color, HorizontalPosition, VerticalPosition } from '~/shared';
 
@@ -23,6 +24,8 @@ export const point = (
 	positionY: VerticalPosition = 'top',
 	foregroundColor?: Color
 ) => {
+	const scene = getSceneId(ctx.canvas);
+
 	let opacity = 1;
 
 	const str = parseColor(color);
@@ -35,7 +38,7 @@ export const point = (
 		opacity = 1;
 	}
 
-	const canvas = cartesianToCanvas(ctx, x, y);
+	const canvas = cartesianToCanvas(ctx, x, y, scene);
 
 	if (opacity !== 0) {
 		ctx.fillStyle = 'black';
@@ -65,7 +68,7 @@ export const point = (
 			: positionY === 'top' ? canvas[1] - 10
 			: canvas[1];
 
-		const [x, y] = canvasToCartesian(ctx, tx, ty);
+		const [x, y] = canvasToCartesian(ctx, tx, ty, scene);
 
 		label.render(
 			x,

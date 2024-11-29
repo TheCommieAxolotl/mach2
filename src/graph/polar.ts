@@ -1,4 +1,5 @@
 import { parseColor } from '~/color';
+import { getSceneId } from '~/lifecycle';
 import { cartesianToCanvas, holdsValue, polarToCartesian } from '~/math';
 import { Color } from '~/shared';
 
@@ -19,7 +20,9 @@ export const polar = (
 	bounds = 2 * Math.PI,
 	precision = 0.01
 ) => {
-	const initial = cartesianToCanvas(ctx, ...polarToCartesian(fn(0), 0));
+	const scene = getSceneId(ctx.canvas);
+
+	const initial = cartesianToCanvas(ctx, ...polarToCartesian(fn(0), 0), scene);
 
 	ctx.beginPath();
 
@@ -31,7 +34,7 @@ export const polar = (
 	}
 
 	for (let theta = 0; theta < bounds; theta += precision) {
-		const point = cartesianToCanvas(ctx, ...polarToCartesian(fn(theta), theta));
+		const point = cartesianToCanvas(ctx, ...polarToCartesian(fn(theta), theta), scene);
 
 		if (holdsValue(point[0]) && holdsValue(point[1])) {
 			if (!hasInitial) {
@@ -42,7 +45,7 @@ export const polar = (
 			}
 		} else {
 			// zero is the "base case"
-			ctx.lineTo(...cartesianToCanvas(ctx, 0, 0));
+			ctx.lineTo(...cartesianToCanvas(ctx, 0, 0, scene));
 		}
 	}
 

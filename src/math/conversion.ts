@@ -1,49 +1,55 @@
 import { lerp } from './lerp';
 import { Point } from './points';
 
-let scale = 60;
-let targetScale = 60;
-let inLoop = false;
-let translate: [number, number] = [0, 0];
+const defaultScale = 60;
 
-export const getScale = () => scale;
-export const getTargetScale = () => targetScale;
+const scales: number[] = [];
+const targetScales: number[] = [];
+const inLoops: boolean[] = [];
+const translates: [number, number][] = [];
+
+export const getScale = (scene: number) => scales[scene];
+export const getTargetScale = (scene: number) => targetScales[scene];
 
 /**
  * Smoothly set the scale.
  */
-export const setScale = (newScale: number) => {
-	targetScale = newScale;
+export const setScale = (newScale: number, scene: number) => {
+	if (scales[scene] === undefined) {
+		scales[scene] = defaultScale;
+	}
 
-	loop();
+	targetScales[scene] = newScale;
+
+	loop(scene);
 };
 
 /**
  * Set the scale immediately.
  */
-export const setImmediateScale = (newScale: number) => {
-	scale = newScale;
-	targetScale = newScale;
+export const setImmediateScale = (newScale: number, scene: number) => {
+	scales[scene] = newScale;
+	targetScales[scene] = newScale;
 };
 
 /**
  * Translate the canvas additively.
  */
-export const pan = (x: number, y: number) => {
-	translate = [translate[0] + x, translate[1] + y];
+export const pan = (x: number, y: number, scene: number) => {
+	translates[scene] = [(translates[scene]?.[0] || 0) + x, (translates[scene]?.[1] || 0) + y];
 };
 
 /**
  * Translate the canvas.
  */
-export const setPan = (x: number, y: number) => {
-	translate = [x, y];
+export const setPan = (x: number, y: number, scene: number) => {
+	translates[scene] = [x, y];
 };
 
 /**
  * Get the translation of the canvas.
  */
-export const getTranslation = () => translate;
+export const getTranslation = (scene: number) => translates[scene];
 
 /**
  * Get the visible bounds of the canvas.
@@ -52,29 +58,32 @@ export const getTranslation = () => translate;
  *
  */
 export const getVisibleBounds = (
-	ctx: CanvasRenderingContext2D
+	ctx: CanvasRenderingContext2D,
+	scene: number
 ): [number, number, number, number] => {
-	const centerX = ctx.canvas.width / 2 + translate[0];
-	const centerY = ctx.canvas.height / 2 + translate[1];
+	translates[scene] ??= [0, 0];
+
+	const centerX = ctx.canvas.width / 2 + (translates[scene][0] || 0);
+	const centerY = ctx.canvas.height / 2 + (translates[scene][1] || 0);
 
 	return [
-		(0 - centerX) / scale,
-		(ctx.canvas.width - centerX) / scale,
-		(centerY - ctx.canvas.height) / scale,
-		(centerY - 0) / scale
+		(0 - centerX) / scales[scene],
+		(ctx.canvas.width - centerX) / scales[scene],
+		(centerY - ctx.canvas.height) / scales[scene],
+		(centerY - 0) / scales[scene]
 	];
 };
 
-const loop = (r?: boolean) => {
-	if (inLoop && !r) return;
+const loop = (scene: number, r?: boolean) => {
+	if (inLoops[scene] && !r) return;
 
-	inLoop = true;
-	scale = lerp(scale, targetScale, 0.1);
+	inLoops[scene] = true;
+	scales[scene] = lerp(scales[scene], targetScales[scene], 0.1);
 
-	if (Math.abs(scale - targetScale) > 0.1) {
-		requestAnimationFrame(loop.bind(null, true));
+	if (Math.abs(scales[scene] - targetScales[scene]) > 0.1) {
+		requestAnimationFrame(loop.bind(null, scene, true));
 	} else {
-		inLoop = false;
+		inLoops[scene] = false;
 	}
 };
 
@@ -84,16 +93,19 @@ const loop = (r?: boolean) => {
 export const cartesianToCanvas = <X extends number | undefined, Y extends number | undefined>(
 	ctx: CanvasRenderingContext2D,
 	x: X,
-	y: Y
+	y: Y,
+	scene: number
 ): X extends number ? Point
 : Y extends number ? Point
 : undefined => {
 	if (x === undefined || y === undefined) return undefined as any;
 
-	const centerX = ctx.canvas.width / 2 + translate[0];
-	const centerY = ctx.canvas.height / 2 + translate[1];
+	translates[scene] ??= [0, 0];
 
-	return [centerX + x * scale, centerY - y * scale] as any;
+	const centerX = ctx.canvas.width / 2 + translates[scene][0];
+	const centerY = ctx.canvas.height / 2 + translates[scene][1];
+
+	return [centerX + x * scales[scene], centerY - y * scales[scene]] as any;
 };
 
 /**
@@ -102,27 +114,35 @@ export const cartesianToCanvas = <X extends number | undefined, Y extends number
 export const canvasToCartesian = <X extends number | undefined, Y extends number | undefined>(
 	ctx: CanvasRenderingContext2D,
 	x: X,
-	y: Y
+	y: Y,
+	scene: number
 ): X extends number ? Point
 : Y extends number ? Point
 : undefined => {
 	if (x === undefined || y === undefined) return undefined as any;
 
-	const centerX = ctx.canvas.width / 2 + translate[0];
-	const centerY = ctx.canvas.height / 2 + translate[1];
+	translates[scene] ??= [0, 0];
 
-	return [(x - centerX) / scale, (centerY - y) / scale] as any;
+	const centerX = ctx.canvas.width / 2 + (translates[scene][0] || 0);
+	const centerY = ctx.canvas.height / 2 + (translates[scene][1] || 0);
+
+	return [(x - centerX) / scales[scene], (centerY - y) / scales[scene]] as any;
 };
 
 /**
  * Converts a point from DOM coordinates to canvas coordinates.
  */
-export const domToCartesian = (ctx: CanvasRenderingContext2D, x: number, y: number): Point => {
+export const domToCartesian = (
+	ctx: CanvasRenderingContext2D,
+	x: number,
+	y: number,
+	scene: number
+): Point => {
 	const rect = ctx.canvas.getBoundingClientRect();
 
 	const resolution = Number(ctx.canvas.dataset.resolution);
 
-	return canvasToCartesian(ctx, x * resolution - rect.left, y * resolution - rect.top);
+	return canvasToCartesian(ctx, x * resolution - rect.left, y * resolution - rect.top, scene);
 };
 
 /**
