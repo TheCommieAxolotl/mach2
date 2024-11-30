@@ -84,8 +84,12 @@ export const lightPink: ObjectColor = {
 /**
  * Take any color and return a new color with the specified opacity.
  */
-export const opacity = (color: Color, opacity: number): Extract<Color, string> => {
+export const opacity = (color: Color, opacity: number): Exclude<Color, ObjectColor> => {
 	const str = parseColor(color);
+
+	if (typeof str !== 'string') {
+		return str;
+	}
 
 	const format =
 		str.startsWith('#') ? 'hex'
@@ -132,9 +136,16 @@ export const objectOpacity = (color: ObjectColor, opacity: number): ObjectColor 
 /**
  * Parse a color to a string.
  */
-export const parseColor = (color?: Color, latex?: boolean): string => {
+export const parseColor = (
+	color?: Color,
+	latex?: boolean
+): string | CanvasGradient | CanvasPattern => {
 	if (!color) {
 		return '';
+	}
+
+	if (color instanceof CanvasGradient || color instanceof CanvasPattern) {
+		return color;
 	}
 
 	if (typeof color === 'string') {

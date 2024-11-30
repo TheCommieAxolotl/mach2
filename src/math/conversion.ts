@@ -28,6 +28,8 @@ export const setScale = (newScale: number, scene: number) => {
  * Set the scale immediately.
  */
 export const setImmediateScale = (newScale: number, scene: number) => {
+	inLoops[scene] = false;
+
 	scales[scene] = newScale;
 	targetScales[scene] = newScale;
 };

@@ -6,7 +6,7 @@ const scene = mach2.scene(document.querySelector('canvas#scene') as HTMLCanvasEl
 });
 
 mach2.math.setImmediateScale(100, scene.id);
-mach2.math.setPan(0, 50, scene.id);
+mach2.math.setPan(0, 500, scene.id);
 
 const colors = [
 	mach2.color.lightBlue,

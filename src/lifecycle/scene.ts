@@ -16,7 +16,7 @@ export type SceneOptions = {
 	debug: boolean;
 	resolution: number;
 	zoom: number;
-	background: Color;
+	background: Exclude<Color, CanvasGradient | CanvasPattern>;
 	interactive:
 		| boolean
 		| {
@@ -70,7 +70,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 		throw new Error('CanvasRenderingContext2D is null');
 	}
 
-	canvas.style.backgroundColor = parseColor(settings.background);
+	canvas.style.backgroundColor = parseColor(settings.background) as string;
 
 	let deltaTime = 0;
 	let frame = 0;

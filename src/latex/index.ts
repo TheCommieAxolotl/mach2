@@ -72,7 +72,13 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
 			mounted.style.top = `${p[1] / Number(ctx.canvas.dataset.resolution) + rect.top}px`;
 			mounted.style.fontSize = typeof size === 'number' ? `${size}px` : size;
 
-			mounted.style.color = parseColor(color);
+			const str = parseColor(color);
+
+			if (str instanceof CanvasGradient || str instanceof CanvasPattern) {
+				mounted.style.color = 'white';
+			} else {
+				mounted.style.color = str;
+			}
 
 			const translateX =
 				typeof alignX === 'number' ? lerp(-1, 0, alignX) * 100 + '%'

@@ -30,12 +30,14 @@ export const point = (
 
 	const str = parseColor(color);
 
-	if (str?.startsWith('#') && str.length === 9) {
-		opacity = parseInt(str.slice(7), 16) / 255;
-	} else if (str?.startsWith('rgba')) {
-		opacity = parseFloat(str.slice(5, str.length - 1).split(',')[3]);
-	} else if (str?.startsWith('rgb')) {
-		opacity = 1;
+	if (typeof str === 'string') {
+		if (str?.startsWith('#') && str.length === 9) {
+			opacity = parseInt(str.slice(7), 16) / 255;
+		} else if (str?.startsWith('rgba')) {
+			opacity = parseFloat(str.slice(5, str.length - 1).split(',')[3]);
+		} else if (str?.startsWith('rgb')) {
+			opacity = 1;
+		}
 	}
 
 	const canvas = cartesianToCanvas(ctx, x, y, scene);

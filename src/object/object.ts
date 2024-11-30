@@ -29,7 +29,7 @@ export class SceneObject {
 	}
 
 	public zoom(target: number) {
-		setScale(target);
+		setScale(target, this.scene!.id);
 	}
 
 	_init(
