@@ -6,6 +6,10 @@ outline: deep
 
 A polynomial is a mathematical expression that consists of variables and coefficients, and is made up of one or more terms. Each term is a product of a coefficient and a variable raised to a power. For example, the polynomial $3x^2 + 2x + 1$ has three terms: $3x^2$, $2x$, and $1$.
 
+$$ P(x) = a_x{x^n} + a_{x-1}{x^{n-1}} + \ldots + a_1x + a_0 $$
+
+Where $P(x)$ is the polynomial, $a_x$ is the coefficient of the highest power term, $a_{x-1}$ is the coefficient of the next highest power term, and so on, and $n$ is the degree of the polynomial.
+
 ## Graphing
 
 Mach2 provides three functions for graphing polynomials: `mach2.graph.polynomial`, `mach2.graph.polynomialFromRoots`, and `mach2.graph.polynomialFromPoints`.
