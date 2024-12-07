@@ -63,6 +63,35 @@ export const fn = (
 	ctx.lineWidth = lW;
 };
 
+/**
+ * Draw the positive and negative parts of a function of x on the canvas.
+ * @param ctx - The canvas rendering context
+ * @param fun - The function to draw
+ * @param color - The color of the function
+ * @param weight - The weight of the function
+ * @example
+ * // simple unit circle
+ * pmFn(ctx, (x) => Math.sqrt(1 - x ** 2), "red", 2);
+ */
+export const pmFn = (
+	ctx: CanvasRenderingContext2D,
+	fun: (x: number) => number | undefined,
+	color: Color,
+	weight = 1
+) => {
+	const fns = [
+		fun,
+		(x: number) => {
+			const y = fun(x);
+
+			return holdsValue(y) ? -y! : undefined;
+		}
+	];
+
+	for (const f of fns) {
+		fn(ctx, f, color, weight);
+	}
+};
 export const derivative =
 	(fn: (x: number) => number, h = 0.000000000001) =>
 	(x: number) =>
