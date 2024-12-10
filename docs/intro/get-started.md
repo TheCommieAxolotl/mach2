@@ -67,8 +67,6 @@ const canvas = document.getElementById('canvas');
 // Create a new scene
 const scene = mach2.scene(canvas as HTMLCanvasElement);
 
-console.log('hello');
-
 scene.add(
 	// Create a dynamic object, which will update every frame
 	new (class extends mach2.Dynamic {

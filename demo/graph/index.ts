@@ -122,8 +122,6 @@ scene.add(
 				{ horizontal: 1 }
 			];
 
-			console.log(this.opacities(), this.positions());
-
 			const index = i % sequences.length;
 			this.opacities.set(sequences[index]);
 			this.positions.set(positions[index]);
