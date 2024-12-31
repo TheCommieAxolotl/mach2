@@ -23,7 +23,7 @@ export default defineConfig({
 		},
 		footer: {
 			message: 'Made with ❤️ by TheCommieAxolotl',
-			copyright: 'Copyright © 2024 TheCommieAxolotl, Released under the GPL-3.0 License.'
+			copyright: 'Copyright © 2024 - 2025 TheCommieAxolotl, Released under the GPL-3.0 License.'
 		},
 		nav: [
 			{ text: 'Home', link: '/' },
