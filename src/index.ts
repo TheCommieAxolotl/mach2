@@ -1,3 +1,4 @@
+import * as threed from './3d';
 import * as animation from './animation';
 import * as color from './color';
 import * as draw from './draw';
@@ -8,6 +9,7 @@ import * as math from './math';
 import * as object from './object';
 
 export default {
+	...threed,
 	...object,
 	...lifecycle,
 	math,

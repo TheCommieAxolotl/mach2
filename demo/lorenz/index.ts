@@ -1,9 +1,9 @@
 import 'katex/dist/katex.min.css';
 import mach2 from 'mach2';
 
-const scene = mach2.scene(document.querySelector('canvas') as HTMLCanvasElement);
-
-mach2.math.setImmediateScale(30, scene.id);
+const scene = mach2.scene3d(document.querySelector('canvas#scene') as HTMLCanvasElement, {
+	debug: true
+});
 
 const sigma = 10;
 const rho = 28;
@@ -47,8 +47,6 @@ const colors = [
 	mach2.color.lightYellow
 ];
 
-const points: [number, number, number][][] = [];
-
 const diff1 = await mach2.latex.createLatexRenderingContext(
 	scene.ctx,
 	'\\frac{dx}{dt} = \\sigma(y - x)'
@@ -62,9 +60,11 @@ const diff3 = await mach2.latex.createLatexRenderingContext(
 	'\\frac{dz}{dt} = xy - \\beta z'
 );
 
+const points: [number, number, number][][] = [];
+
 scene.add(
 	new (class extends mach2.Dynamic {
-		public update() {
+		public async update() {
 			if (this.ctx === null) {
 				throw new Error('CanvasRenderingContext2D is null');
 			}
@@ -77,7 +77,7 @@ scene.add(
 			diff2.render(...latexPoint2, 'white', 'right', 'top');
 			diff3.render(...latexPoint3, 'white', 'right', 'top');
 
-			mach2.graph.axis(this.ctx, 0.4);
+			mach2.three.graph.axis(this.ctx, 100);
 
 			for (let i = 0; i < states.length; i++) {
 				const state = states[i];
@@ -88,14 +88,9 @@ scene.add(
 
 				points[i].push(states[i]);
 
-				mach2.draw.point(this.ctx, states[i][0], states[i][1], colors[i], 2);
+				mach2.three.draw.point(this.ctx, states[i], colors[i]);
 
-				mach2.graph.segment(
-					this.ctx,
-					points[i]?.map(([x, y]) => [x, y]),
-					mach2.color.objectOpacity(colors[i], 0.8),
-					1
-				);
+				mach2.three.graph.segment(this.ctx, points[i], colors[i]);
 			}
 		}
 	})()
