@@ -1,7 +1,3 @@
-import * as draw from './draw';
-import * as graph from './graph';
-import * as render from './render';
-
-export * from './scene';
-
-export const three = { draw, graph, render };
+export * as draw from './draw';
+export * as graph from './graph';
+export * as render from './render';
