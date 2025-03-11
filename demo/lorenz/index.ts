@@ -82,14 +82,12 @@ scene.add(
 			for (let i = 0; i < states.length; i++) {
 				const state = states[i];
 
-				points[i] ??= [];
-
 				states[i] = rk4(lorenz, state, this.deltaTime / 1000);
 
+				points[i] ??= [];
 				points[i].push(states[i]);
 
 				mach2.three.draw.point(this.ctx, states[i], colors[i]);
-
 				mach2.three.graph.segment(this.ctx, points[i], colors[i]);
 			}
 		}
