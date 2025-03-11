@@ -2,6 +2,8 @@ import { camera, cameraRotation, setCamera, zoomIn } from './render/plot';
 
 export const registerEvents = (canvas: HTMLCanvasElement) => {
 	canvas.addEventListener('wheel', (e) => {
+		e.preventDefault();
+
 		zoomIn(e.deltaY > 0 ? 1 : -1);
 	});
 
