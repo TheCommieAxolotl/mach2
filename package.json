@@ -39,24 +39,24 @@
 	},
 	"devDependencies": {
 		"@rollup/plugin-terser": "^0.4.4",
-		"@shikijs/vitepress-twoslash": "^1.23.1",
-		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
+		"@shikijs/vitepress-twoslash": "^3.2.1",
+		"@trivago/prettier-plugin-sort-imports": "^5.2.2",
 		"@types/katex": "^0.16.7",
-		"@types/node": "^22.9.3",
-		"jsdom": "^25.0.1",
+		"@types/node": "^22.13.10",
+		"jsdom": "^26.0.0",
 		"markdown-it-mathjax3": "^4.3.2",
-		"prettier": "^3.4.1",
-		"rollup": "^4.27.4",
-		"terser": "^5.36.0",
-		"typescript": "^5.4.2",
-		"vite": "^5.4.11",
-		"vite-plugin-dts": "^4.3.0",
+		"prettier": "^3.5.3",
+		"rollup": "^4.35.0",
+		"terser": "^5.39.0",
+		"typescript": "^5.8.2",
+		"vite": "^6.2.1",
+		"vite-plugin-dts": "^4.5.3",
 		"vite-plugin-tsconfig-paths": "^1.4.1",
-		"vitepress": "^1.5.0",
-		"vitest": "^2.1.5",
+		"vitepress": "^1.6.3",
+		"vitest": "^3.0.8",
 		"vitest-canvas-mock": "^0.3.3"
 	},
 	"optionalDependencies": {
-		"katex": "^0.16.11"
+		"katex": "^0.16.21"
 	}
 }
