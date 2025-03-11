@@ -21,6 +21,7 @@ export const createLatexRenderingContext = async (ctx: CanvasRenderingContext2D,
 	const scene = getSceneId(ctx.canvas);
 
 	if (!katex) {
+		// @ts-expect-error
 		katex = (await import('katex')).default;
 	}
 
