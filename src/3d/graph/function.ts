@@ -51,12 +51,13 @@ export const fn = (
 	ctx.lineWidth = lW;
 };
 
-const darkenByDistance = (c: ObjectColor, distance: number): Color => {
+const darkenByDistance = (c: ObjectColor, distance: number, smartColor = true): Color => {
 	if (typeof c !== 'object') return c;
 
 	const darkestDistance = 40;
 
-	const factor = Math.min(1, Math.max(1 - distance / darkestDistance, 0.1));
+	const factor =
+		Math.min(1, Math.max(1 - distance / darkestDistance, 0.05)) * (smartColor ? 1.5 : 1);
 
 	return {
 		r: c.r * factor,
@@ -70,7 +71,8 @@ export const fn2 = (
 	ctx: CanvasRenderingContext2D,
 	fn: (x: number, y: number) => number | undefined,
 	axisBounds: number,
-	color: Color
+	color: Color,
+	smartColor = true
 ) => {
 	const bounds = [-axisBounds, axisBounds];
 	const step = 0.08;
@@ -113,7 +115,7 @@ export const fn2 = (
 	for (let i = 0; i < quads.length; i++) {
 		const [[c1, c2, c3, c4], s] = quads[i];
 
-		const c = parseColor(darkenByDistance(color as ObjectColor, s));
+		const c = parseColor(darkenByDistance(color as ObjectColor, s, smartColor));
 
 		ctx.beginPath();
 		ctx.fillStyle = c;

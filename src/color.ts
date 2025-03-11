@@ -81,6 +81,25 @@ export const lightPink: ObjectColor = {
 	b: 193
 }; // rgb(226, 162, 193)
 
+export const all = [
+	white,
+	black,
+	red,
+	lightRed,
+	blue,
+	lightBlue,
+	green,
+	lightGreen,
+	yellow,
+	lightYellow,
+	orange,
+	lightOrange,
+	pink,
+	lightPink,
+	purple,
+	lightPurple
+];
+
 /**
  * Take any color and return a new color with the specified opacity.
  */
