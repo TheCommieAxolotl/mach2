@@ -80,11 +80,9 @@ features:
             const canvas = document.getElementById('demo');
 
             if (canvas) {
-                const scene = mach2.scene(canvas, {
+                const scene = mach2.scene3d(canvas, {
                     background: bg
                 });
-
-                mach2.math.setImmediateScale(20)
 
                 scene.add(
                     new class extends mach2.Dynamic {
@@ -92,26 +90,19 @@ features:
                             if (!this.ctx) return;
 
                             const rect = canvas.getBoundingClientRect()
-                                      
-                            mach2.graph.axis(this.ctx, 0.4, mach2.color.opacity(foreground, 0.4));
+                            
+                            mach2.three.graph.axis(this.ctx, 100);
 
                             for (let i = 0; i < states.length; i++) {
                                 const state = states[i];
 
-                                points[i] ??= [];
-
                                 states[i] = rk4(lorenz, state, this.deltaTime / 1000);
 
+                                points[i] ??= [];
                                 points[i].push(states[i]);
 
-                                mach2.draw.point(this.ctx, states[i][0], states[i][1], colors[i], 2);
-
-                                mach2.graph.segment(
-                                    this.ctx,
-                                    points[i]?.map(([x, y]) => [x, y]),
-                                    mach2.color.objectOpacity(colors[i], 0.8),
-                                    1
-                                );
+                                mach2.three.draw.point(this.ctx, states[i], colors[i]);
+                                mach2.three.graph.segment(this.ctx, points[i], colors[i]);
                             }
                         }
                     }
