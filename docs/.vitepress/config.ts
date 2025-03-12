@@ -23,7 +23,8 @@ export default defineConfig({
 		},
 		footer: {
 			message: 'Made with ❤️ by TheCommieAxolotl',
-			copyright: 'Copyright © 2024 - 2025 TheCommieAxolotl, Released under the GPL-3.0 License.'
+			copyright:
+				'Copyright © 2024 - 2025 TheCommieAxolotl, Released under the GPL-3.0 License.'
 		},
 		nav: [
 			{ text: 'Home', link: '/' },
@@ -53,6 +54,10 @@ export default defineConfig({
 					{ text: 'Interactivity', link: '/advanced/interactivity' },
 					{ text: 'Animations', link: '/advanced/animations' }
 				]
+			},
+			{
+				text: '3D',
+				items: [{ text: 'Basics', link: '/3d/basics' }]
 			}
 		],
 		socialLinks: [{ icon: 'github', link: 'https://github.com/TheCommieAxolotl/mach2' }]
@@ -68,6 +73,7 @@ export default defineConfig({
 	markdown: {
 		math: true,
 		codeTransformers: [
+			// @ts-expect-error
 			transformerTwoslash({
 				explicitTrigger: false,
 				twoslashOptions: {

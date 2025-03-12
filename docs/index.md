@@ -38,6 +38,8 @@ features:
     import mach2 from 'mach2';
     import { onMounted } from 'vue';
 
+    mach2.three.render.setCamera(-100, 100, 100);
+
     const sigma = 10;
     const rho = 28;
     const beta = 8 / 3;
