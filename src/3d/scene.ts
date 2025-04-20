@@ -231,6 +231,7 @@ export const scene3d = (
 		id: SCENE_ID,
 		add,
 		start,
+		objects,
 		stop,
 		canvas,
 		destroy,
@@ -273,6 +274,7 @@ export type Scene3D = {
 		) => void;
 	};
 
+	objects: Set<SceneObject>;
 	id: number;
 	options: SceneOptions;
 	canvas: HTMLCanvasElement;

@@ -257,7 +257,6 @@ export type Scene = {
 	start: () => void;
 	stop: () => void;
 	destroy: () => void;
-	objects: Set<SceneObject>;
 
 	zoom: (target: number) => void;
 
@@ -275,6 +274,7 @@ export type Scene = {
 		) => void;
 	};
 
+	objects: Set<SceneObject>;
 	id: number;
 	options: SceneOptions;
 	canvas: HTMLCanvasElement;
