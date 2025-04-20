@@ -1,0 +1,8 @@
+authority: '@onlynv/platform'
+connection: 7axv8vbpmx3xzy4ltr1p2
+apispec: 1
+exclude:
+  - '**/*.local'
+  - '**/*.example'
+include:
+  - '**/.env*'

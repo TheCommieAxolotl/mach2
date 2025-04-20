@@ -231,6 +231,7 @@ export const scene = (canvas: HTMLCanvasElement, options: Partial<SceneOptions> 
 		id: SCENE_ID,
 		add,
 		start,
+		objects,
 		stop,
 		canvas,
 		destroy,
@@ -256,6 +257,7 @@ export type Scene = {
 	start: () => void;
 	stop: () => void;
 	destroy: () => void;
+	objects: Set<SceneObject>;
 
 	zoom: (target: number) => void;
 
